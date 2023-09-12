@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+      <ion-title>
+        Cadastro
+      </ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input [(ngModel)]="nome" label-placement="floating" name="nome" type="text" required
+        placeholder="Digite seu nome completo..."></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input [(ngModel)]="email" name="email" type="email" required placeholder="Digite seu e-mail..."></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input [(ngModel)]="senha" name="senha" type="password" required
+        placeholder="Digite uma senha..."></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Repetir Senha</ion-label>
+      <ion-input [(ngModel)]="repetirSenha" name="repetirSenha" type="password" required
+        placeholder="Digite a mesma senha..."></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" color="primary" class="ion-padding-top" expand="block">Cadastrar</ion-button>
+  </form>
+</ion-content>
