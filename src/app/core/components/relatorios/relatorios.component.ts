@@ -9,6 +9,9 @@ export class RelatoriosComponent  implements OnInit {
 
   //constructor() { }
 
+  numeroCultosMes?:number;
+  
+
   ngOnInit() {}
 
 }
