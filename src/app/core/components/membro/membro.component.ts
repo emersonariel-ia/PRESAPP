@@ -9,9 +9,12 @@ export class MembroComponent  implements OnInit {
 
   //constructor() { }
 
-  frequencia?:number;
-  diasComparecidos?:number;
+  id?:string;
+  nome?:string;
+  frequenciaPorcentagem?:number;
+  qtDiasComparecidos?:number;
   ministerio?:string;
+  dataIngresso?:Date;
   
 
   ngOnInit() {}
