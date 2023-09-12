@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Programação
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top">
+  <ion-card color="light">
+    <ion-chip [outline]="true" [disabled]="true">Próximo culto</ion-chip>
+    <ion-card-header>
+      <ion-card-title>Tenha sua história griada pela visão de Deus</ion-card-title>
+      <ion-card-subtitle>28/07/2023</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-button size="small" color="primary">Ver mais</ion-button>
+  </ion-card>
+
+  <ion-card color="light">
+    <img alt="Armadilhas da cultura" src="../../../../assets/img/armadilhasdacultura.png" />
+    <ion-chip [outline]="true" [disabled]="true">Próximos eventos</ion-chip>
+    <ion-card-header>
+      <ion-card-title>Direto ao ponto: Armadilhas da cultura</ion-card-title>
+      <ion-card-subtitle>17/06/2023 ás 19H</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-button size="small" color="primary">Ver mais</ion-button>
+  </ion-card>
+</ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button>
+      <ion-icon name="document"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button>
+      <ion-icon name="color-palette"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button>
+      <ion-icon name="globe"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
