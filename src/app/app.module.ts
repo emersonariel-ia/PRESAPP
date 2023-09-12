@@ -9,9 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CadastroComponent } from './core/components/cadastro/cadastro.component';
 import { HomeComponent } from './core/components/home/home.component';
+import { LoginComponent } from './core/components/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, CadastroComponent, HomeComponent],
+  declarations: [AppComponent, CadastroComponent, HomeComponent, LoginComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -7,8 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent  implements OnInit {
 
-  constructor() { }
+  //constructor() { }
 
-  ngOnInit() {}
+  email?: string;
+  senha?: string;
 
+  component = LoginComponent;
+
+  ngOnInit() { }
+
+  onSubmit() {
+    // Implemente a lógica de validação e registro de usuário aqui
+    
+      // Faça algo com os valores do formulário (por exemplo, enviar para um serviço de registro)
+      console.log("E-mail:", this.email);
+      console.log("Senha:", this.senha);
+  }
 }
