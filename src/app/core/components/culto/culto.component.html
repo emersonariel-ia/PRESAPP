@@ -1,3 +1,39 @@
-<p>
-  culto works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dados-culto"></ion-back-button>
+      <ion-title>
+        Registro de Culto
+      </ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Titulo</ion-label>
+      <ion-input [(ngModel)]="titulo" label-placement="floating" name="Titulo" type="text" required
+        placeholder="Digite o Título da mensagem"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-input [(ngModel)]="descricao" name="email" type="Descrição" required placeholder="Insira a descrição"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Data</ion-label>
+      <ion-input [(ngModel)]="data" name="data" type="Data" required
+        placeholder="Qual é a data do culto?"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Hora</ion-label>
+      <ion-input [(ngModel)]="hora" name="hora" type="Hora" required
+        placeholder="Qual horário?"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" color="primary" class="ion-padding-top" expand="block">Agendar</ion-button>
+  </form>
+</ion-content>

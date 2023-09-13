@@ -18,6 +18,11 @@ export class CultoComponent  implements OnInit {
   numeroPresentes?:number;
   presentes: MembroComponent[] = [];
 
-
   ngOnInit() {}
+
+  onSubmit() {
+    
+      // Faça algo com os valores do formulário (por exemplo, enviar para um serviço de registro)
+    
+  }
 }
