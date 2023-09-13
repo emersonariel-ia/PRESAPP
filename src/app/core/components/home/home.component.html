@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="end" (click)="irParaPaginaDeLogin()">
+      <ion-icon name="person" size="small" color="primary"></ion-icon>
+    </ion-buttons>
     <ion-title class="ion-text-center">
       Programação
     </ion-title>
@@ -28,20 +31,21 @@
     <ion-button size="small" color="primary">Ver mais</ion-button>
   </ion-card>
 </ion-content>
+<app-rodape-icones></app-rodape-icones>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button>
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
   <ion-fab-list side="top">
+    <!-- <ion-fab-button>
+      <ion-icon name="pie-chart"></ion-icon>
+    </ion-fab-button> -->
     <ion-fab-button>
-      <ion-icon name="document"></ion-icon>
+      <ion-icon name="person-add"></ion-icon>
     </ion-fab-button>
     <ion-fab-button>
-      <ion-icon name="color-palette"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-button>
-      <ion-icon name="globe"></ion-icon>
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>
 </ion-fab>
