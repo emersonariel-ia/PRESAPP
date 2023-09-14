@@ -15,6 +15,8 @@ import { RelatoriosComponent } from './core/components/relatorios/relatorios.com
 import { CultoComponent } from './core/components/culto/culto.component';
 import { CadastroMembroComponent } from './core/components/cadastro-membro/cadastro-membro.component';
 
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [AppComponent, CadastroComponent, HomeComponent, LoginComponent, RodapeIconesComponent, RelatoriosComponent
     , CultoComponent, CadastroMembroComponent],
