@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,10 +11,13 @@ export interface UserData {
 }
 @Component({
   selector: 'app-relatorios',
-  templateUrl: './relatorios.component.html',
-  styleUrls: ['./relatorios.component.scss'],
+  templateUrl: 'relatorios.page.html',
+  styleUrls: ['relatorios.page.scss']
 })
-export class RelatoriosComponent implements OnInit {
+export class RelatoriosPage {
+
+
+  @Output() titulo: string = 'Relatórios';
 
   displayedColumns: string[] = ['id', 'name'];
   dataSource = new MatTableDataSource<UserData>(ELEMENT_DATA);
@@ -35,7 +38,6 @@ export class RelatoriosComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-
 
 }
 
