@@ -1,18 +1,27 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
 export const environment = {
-  production: false,
-  firebase: {
-    apiKey: 'xxx',
-    authDomain: 'bezkoder-firebase.firebaseapp.com',
-    databaseURL: 'https://bezkoder-firebase.firebaseio.com',
-    projectId: 'bezkoder-firebase',
-    storageBucket: 'bezkoder-firebase.appspot.com',
-    messagingSenderId: 'xxx',
-    appId: 'xxx'
-  }
-};
+    production: false,
+    firebase: {
+      apiKey: "AIzaSyB6ecbkcaVRHjx5PcXHIQf_UqvEim423s8",
+      authDomain: "church-manager-6ed4a.firebaseapp.com",
+      databaseURL: "https://church-manager-6ed4a-default-rtdb.firebaseio.com",
+      projectId: "church-manager-6ed4a",
+      storageBucket: "church-manager-6ed4a.appspot.com",
+      messagingSenderId: "335382472662",
+      appId: "1:335382472662:web:408dfbe48642cd9ad0e677",
+      measurementId: "G-7LYWJBWYVL"
+    }
+  };
+
+
+// Initialize Firebase
+//const app = initializeApp(environment.firebase);
+//const analytics = getAnalytics(app);
 
 /*
  * For easier debugging in development mode, you can import the following file

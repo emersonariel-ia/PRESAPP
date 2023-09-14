@@ -19,14 +19,35 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+const environment = {
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyB6ecbkcaVRHjx5PcXHIQf_UqvEim423s8",
+    authDomain: "church-manager-6ed4a.firebaseapp.com",
+    databaseURL: "https://church-manager-6ed4a-default-rtdb.firebaseio.com",
+    projectId: "church-manager-6ed4a",
+    storageBucket: "church-manager-6ed4a.appspot.com",
+    messagingSenderId: "335382472662",
+    appId: "1:335382472662:web:408dfbe48642cd9ad0e677",
+    measurementId: "G-7LYWJBWYVL"
+  }
+};
 
 @NgModule({
   declarations: [AppComponent, CadastroComponent, LoginComponent, RelatoriosComponent
     , CultoComponent, CadastroMembroComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, NgxEchartsModule.forRoot({ echarts: () => import('echarts') })
-    , MatTableModule, BrowserAnimationsModule, MatPaginatorModule, MatSortModule, MatFormFieldModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, NgxEchartsModule.forRoot({ echarts: () => import('echarts') }), 
+  MatTableModule, BrowserAnimationsModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, 
+  AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule, AngularFirestoreModule, AngularFireStorageModule,
+  AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {  
+}
