@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MembroComponent } from '../membro/membro.component';
 
 @Component({
   selector: 'app-cadastro-membro',
@@ -10,7 +9,11 @@ export class CadastroMembroComponent  implements OnInit {
 
   constructor() { }
 
-  membro = MembroComponent;
+  nome?:string;
+  frequenciaPorcentagem?:number;
+  qtDiasComparecidos?:number;
+  ministerio?:string;
+  dataIngresso?:Number;
 
   ngOnInit() {
     
@@ -18,6 +21,8 @@ export class CadastroMembroComponent  implements OnInit {
 
   onSubmit() {
 
+    this.frequenciaPorcentagem = 0;
+    this.qtDiasComparecidos = 1;
+    this.dataIngresso = Date.now();
   }
-
 }
