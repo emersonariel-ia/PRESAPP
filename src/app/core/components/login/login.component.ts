@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/models';
+import { entrarGerente } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +15,24 @@ export class LoginComponent  implements OnInit {
   senha?: string;
 
   component = LoginComponent;
+  usuarios?: Usuario;
 
   ngOnInit() { }
 
   onSubmit() {
-    // Implemente a lógica de validação e registro de usuário aqui
-    
-      // Faça algo com os valores do formulário (por exemplo, enviar para um serviço de registro)
+      if(this.email !== '' && this.senha !== '') {   
+        const email = this.email || '';
+        const senha = this.senha || '';    
+        
+        this.usuarios = {          
+          email: email,
+          senha: senha
+        }
+
+        const resp = entrarGerente(this.usuarios);
+        console.log(resp);
+      }
+
       console.log("E-mail:", this.email);
       console.log("Senha:", this.senha);
   }

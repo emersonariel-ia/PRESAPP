@@ -16,8 +16,8 @@ export class Usuario {
   did?: string;
   nome?: string;
   sobrenome?: string;
-  email?: string;
-  senha?: string;
+  email!: string;
+  senha!: string;
 
   constructor() {
   }

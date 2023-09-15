@@ -4,7 +4,9 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, set } from "firebase/database";
-import { Usuario } from "src/app/models/models";
+import { UserResponse, Usuario } from "src/app/models/models";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Injectable } from "@angular/core";
 
 export const environment = {
   production: false,
@@ -20,8 +22,9 @@ export const environment = {
   }
 };
 
-initializeApp(environment.firebase);
+const app = initializeApp(environment.firebase);
 export const db = getDatabase();
+export const auth = getAuth(app);
 
 export function alterarUsuario(data: Usuario) {
   const { v4: uuidv4 } = require('uuid');
@@ -31,6 +34,53 @@ export function alterarUsuario(data: Usuario) {
   }).then(d => {
     console.log('>>>>>>>>>>>', d)
   });
+}
+
+export function criaGerente(data: Usuario) {
+  createUserWithEmailAndPassword(auth, data.email, data.senha)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    // ..
+  });
+}
+
+export function entrarGerente(us: Usuario) {
+  signInWithEmailAndPassword(auth, us.email, us.senha)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private async registrar(usuario: Usuario) {
+    try {
+      return  {
+        result: await createUserWithEmailAndPassword(auth,
+          usuario.email, usuario.senha)
+      } as UserResponse;
+    } catch (e) {
+      console.log(e);
+      return  {
+        error: e
+      } as UserResponse;
+    }
+  }
 }
 
 // export function buscaUsuario(){
