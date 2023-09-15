@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { getDatabase, onValue, ref, set } from 'firebase/database';
+import { db } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-cadastro',
@@ -15,6 +17,7 @@ export class CadastroComponent implements OnInit {
 
   component = LoginComponent;
 
+  
   //constructor() { }
 
   ngOnInit() { }
@@ -28,16 +31,9 @@ export class CadastroComponent implements OnInit {
       console.error("As senhas não coincidem.");
     } else {
 
-      const db = getDatabase();
-
-      //temos que achar forma inteligente de incrementar o id 
-      const starCountRef = ref(db, 'posts/' + 1 + '/starCount');
-      onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      data.val;
-      });
       
-      set(ref(db, 'users/' + 2), {
+      const { v4: uuidv4 } = require('uuid');      
+      set(ref(db, 'users/' + uuidv4()), {
       username: this.nome,
       email: this.email
       });

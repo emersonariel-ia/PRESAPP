@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
 
 export const environment = {
     production: false,
@@ -17,5 +18,10 @@ export const environment = {
       measurementId: "G-7LYWJBWYVL"
     }
   };
+
+
+export class database {
+  db = getDatabase();
+}
 
 

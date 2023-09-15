@@ -1,21 +1,3 @@
-import { Injectable } from '@angular/core';
-import { Gerente } from 'src/app/models/models';
-// import { AngularFirestore } from '@angular/fire/compat/firestore';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class CadastroGerenteService {
-
-//   constructor(private firestore : AngularFireStore) { }
-
-  
-
-//   create(gerente:Gerente) {
-//     const result = await 
-//   }
-// }
-
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set } from "firebase/database";
 
