@@ -1,10 +1,10 @@
 export interface Membro {
-  id?:string;
-  name?:string;
-  frequenciaPorcentagem?:number;
-  qtDiasComparecidos?:number;
-  ministerio?:string;
-  dataIngresso?:string
+  id?: string;
+  name?: string;
+  frequenciaPorcentagem?: number;
+  qtDiasComparecidos?: number;
+  ministerio?: string;
+  dataIngresso?: string
 }
 
 export interface Gerente {
@@ -16,8 +16,8 @@ export class Usuario {
   did?: string;
   nome?: string;
   sobrenome?: string;
-  email!: string;
-  senha!: string;
+  email?: string;
+  senha?: string;
 
   constructor() {
   }
@@ -25,12 +25,12 @@ export class Usuario {
 
 export interface UserResponse {
   result?: {
-      email?: string;
-      uid?: string;
-      user?: any;
+    email?: string;
+    uid?: string;
+    user?: any;
   };
   error?: {
-      code?: string;
-      message?: string;
+    code?: string;
+    message?: string;
   };
 }
