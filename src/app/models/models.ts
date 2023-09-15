@@ -7,6 +7,10 @@ export interface Membro {
   dataIngresso?:string
 }
 
+export interface Gerente {
+  nome?: string
+}
+
 export class Usuario {
   uid?: string;
   did?: string;
@@ -18,7 +22,6 @@ export class Usuario {
   constructor() {
   }
 }
-
 
 export interface UserResponse {
   result?: {

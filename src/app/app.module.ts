@@ -25,6 +25,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
+import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
+
 const environment = {
   production: false,
   firebase: {
@@ -38,6 +41,18 @@ const environment = {
     measurementId: "G-7LYWJBWYVL"
   }
 };
+
+  export const firebaseConfig = {
+    // ...
+    // The value of `databaseURL` depends on the location of the database
+    databaseURL: "https://church-manager-6ed4a-default-rtdb.firebaseio.com/",
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  
+  // Initialize Realtime Database and get a reference to the service
+  const database = getDatabase(app);
 
 @NgModule({
   declarations: [AppComponent, CadastroComponent, LoginComponent, RelatoriosComponent
