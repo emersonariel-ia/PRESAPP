@@ -4,7 +4,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, set } from "firebase/database";
-import { UserResponse, Usuario } from "src/app/models/models";
+import { Culto, UserResponse, Usuario } from "src/app/models/models";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Injectable } from "@angular/core";
 
@@ -25,6 +25,18 @@ export const environment = {
 const app = initializeApp(environment.firebase);
 export const db = getDatabase();
 export const auth = getAuth(app);
+
+export function criarCulto(data: Culto) {
+  const { v4: uuidv4 } = require('uuid');
+  set(ref(db, 'cultos/' + uuidv4()), {
+    titulo: data.titulo,
+    descricao: data.descricao,
+    data: data.data,
+    hora: data.hora
+  }).then(d => {
+    console.log('>>>>>>>>>>>', d)
+  });
+}
 
 export function alterarUsuario(data: Usuario) {
   const { v4: uuidv4 } = require('uuid');

@@ -1,3 +1,5 @@
+import { Time } from "@angular/common";
+
 export interface Membro {
   id?: string;
   name?: string;
@@ -5,6 +7,17 @@ export interface Membro {
   qtDiasComparecidos?: number;
   ministerio?: string;
   dataIngresso?: string
+}
+
+export class Culto {
+  titulo?: string;
+  descricao?: string;
+  data?: Date;
+  hora?: string
+
+  constructor() {
+
+  }
 }
 
 export interface Gerente {
