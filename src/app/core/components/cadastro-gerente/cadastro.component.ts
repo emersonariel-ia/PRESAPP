@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { getDatabase, onValue, ref, set } from 'firebase/database';
-import { db } from 'src/environments/environment';
+// import { database, db } from 'src/environments/environment';
 
 
 @Component({
@@ -32,11 +32,11 @@ export class CadastroComponent implements OnInit {
     } else {
 
       
-      const { v4: uuidv4 } = require('uuid');      
-      set(ref(db, 'users/' + uuidv4()), {
-      username: this.nome,
-      email: this.email
-      });
+      // const { v4: uuidv4 } = require('uuid');      
+      // set(ref(database.db, 'users/' + uuidv4()), {
+      // username: this.nome,
+      // email: this.email
+      // });
 
       // Faça algo com os valores do formulário (por exemplo, enviar para um serviço de registro)
       console.log("Nome:", this.nome);
