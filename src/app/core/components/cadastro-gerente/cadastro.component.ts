@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
-import { alterarUsuario, criaGerente } from 'src/environments/environment';
+import { criaGerente } from 'src/environments/environment';
 import { Usuario } from 'src/app/models/models';
 
 @Component({
@@ -36,7 +36,6 @@ export class CadastroComponent implements OnInit {
       }
 
       criaGerente(this.usuarios);
-      //alterarUsuario(this.usuarios);
 
       console.log("Nome:", this.nome);
       console.log("E-mail:", this.email);

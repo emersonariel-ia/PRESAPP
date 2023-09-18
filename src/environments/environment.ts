@@ -38,21 +38,12 @@ export function criarCulto(data: Culto) {
   });
 }
 
-export function alterarUsuario(data: Usuario) {
-  const { v4: uuidv4 } = require('uuid');
-  set(ref(db, 'users/' + uuidv4()), {
-    username: data.nome,
-    email: data.email
-  }).then(d => {
-    console.log('>>>>>>>>>>>', d)
-  });
-}
-
 export function criaGerente(data: Usuario) {
   createUserWithEmailAndPassword(auth, data.email, data.senha)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    console.log('login do usuarop', userCredential);
     // ...
   })
   .catch((error) => {
