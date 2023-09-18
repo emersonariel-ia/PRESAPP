@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SharedModule } from './core/shared/shared.module';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -43,7 +44,7 @@ const environment = {
   declarations: [AppComponent, CadastroComponent, LoginComponent, RelatoriosComponent
     , CultoComponent, CadastroMembroComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
-    MatTableModule, BrowserAnimationsModule, MatPaginatorModule, MatSortModule, MatFormFieldModule,
+    MatTableModule, BrowserAnimationsModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, SharedModule,
     AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule, AngularFirestoreModule, AngularFireStorageModule,
     AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

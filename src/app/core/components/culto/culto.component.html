@@ -1,13 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dados-culto"></ion-back-button>
-      <ion-title>
-        Registro de Culto
-      </ion-title>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-cabecalho [titulo]="tituloCabecalho"></app-cabecalho>
 
 <ion-content class="ion-padding">
   <form (ngSubmit)="onSubmit()">
@@ -34,3 +25,9 @@
     <ion-button type="submit" color="primary" class="ion-padding-top" expand="block">Agendar</ion-button>
   </form>
 </ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button href="/registro-culto">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
