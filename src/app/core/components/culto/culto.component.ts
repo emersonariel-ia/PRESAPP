@@ -14,10 +14,9 @@ export class CultoComponent implements OnInit {
   constructor(private service: Services) { }
 
   titulo?: string;
-  descricao?: string;
+  responsavel?: string;
   foto?: string;
   data?: Date;
-  hora?: string;
   numeroPresentes?: number;
   presentes: MembroComponent[] = [];
 
@@ -32,14 +31,14 @@ export class CultoComponent implements OnInit {
 
   onSubmit() {
 
+    //console.log('data', this.data)
     this.culto = {
       titulo: this.titulo,
-      descricao: this.descricao,
       data: this.data,
-      hora: this.hora
+      responsavel: this.responsavel,
+      tipo: 1,
     };
     //this.selectedDateTime =  
-    //console.log(this.datePicker.value)
     //criarCulto(this.culto);
 
     this.service.criarCulto(this.culto);

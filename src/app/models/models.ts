@@ -11,9 +11,9 @@ export interface Membro {
 
 export class Culto {
   titulo?: string;
-  descricao?: string;
+  responsavel?: string;
   data?: Date;
-  hora?: string
+  tipo?: number;
 
   constructor() {
 

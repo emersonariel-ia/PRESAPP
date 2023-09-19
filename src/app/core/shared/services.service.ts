@@ -31,20 +31,22 @@ export class Services {
   async get(): Promise<Array<Culto>> {
     const snapshot = await get(this.ref);
     snapshot.forEach((linha) => {
+      console.log('linha', linha);
       this.cultos.push({
-        titulo: linha.val().titulo      
+        titulo: linha.val().titulo
       });
-      console.log(linha.val().titulo);})
+      console.log(linha.val().titulo);
+    })
     return this.cultos;
   }
 
   criarCulto(data: Culto) {
     const { v4: uuidv4 } = require('uuid');
-    const ob = set(ref(this.db, 'cultos/' + uuidv4()), {
+    const ob = set(ref(this.db, 'eventos/' + uuidv4()), {
       titulo: data.titulo,
-      descricao: data.descricao,
+      responsavel: data.responsavel,
       data: data.data,
-      hora: data.hora
+      tipo: 1
     }).then(d => {
       console.log(ob)
     });

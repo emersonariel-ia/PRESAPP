@@ -2,6 +2,8 @@ import { Component, Output } from '@angular/core';
 import { Services } from 'src/app/core/shared/services.service';
 import { Culto } from 'src/app/models/models';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Observable, map } from 'rxjs';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-tab2',
@@ -12,15 +14,28 @@ export class Tab2Page {
 
   @Output() titulo: string = 'Programação de culto';
 
-  cultos:  any = [];
-  
-  constructor(private service: Services, private teste: AngularFireDatabase) {
-    this.cultos = this.teste.list('cultos/');
-  }
-  
+  cultos: any = [];
+  eventos: any = [];
+
+  constructor(private service: Services, private afDatabase: AngularFireDatabase) { }
+
   ngOnInit() {
-    //this.cultos = this.service.get();
-    console.log('a', this.cultos);
+    //this.cultos = this.afDatabase.list('/eventos');
+    this.eventos = this.afDatabase.object('/eventos');
+
+    // Leia os dados do objeto
+    this.eventos.valueChanges().subscribe((data: any) => {
+      this.cultos = [];
+      Object.entries(data).map(d => {
+        this.cultos.push(d[1]);
+      })
+      // console.log('Dados do objeto:', this.cultos);
+    });
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return format(date, 'dd/MM/yyyy HH:mm');
   }
 }
 
