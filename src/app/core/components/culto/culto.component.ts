@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MembroComponent } from '../membro/membro.component';
-import { criarCulto } from 'src/environments/environment';
+import { Services } from '../../shared/services.service';
 import { Culto } from 'src/app/models/models';
 
 @Component({
@@ -10,7 +10,7 @@ import { Culto } from 'src/app/models/models';
 })
 export class CultoComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private service: Services) { }
 
   titulo?:string;
   descricao?:string;
@@ -33,9 +33,6 @@ export class CultoComponent  implements OnInit {
       hora: this.hora
     };
 
-    criarCulto(this.culto);
-    
-      // Faça algo com os valores do formulário (por exemplo, enviar para um serviço de registro)
-    
+    this.service.criarCulto(this.culto);
   }
 }

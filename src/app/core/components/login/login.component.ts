@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/models';
-import { entrarGerente } from 'src/environments/environment';
+import { Services } from '../../shared/services.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import { entrarGerente } from 'src/environments/environment';
 })
 export class LoginComponent  implements OnInit {
 
-  //constructor() { }
+  constructor(private service: Services) { }
 
   email?: string;
   senha?: string;
@@ -29,7 +29,7 @@ export class LoginComponent  implements OnInit {
           senha: senha
         }
 
-        const resp = entrarGerente(this.usuarios);
+        const resp = this.service.entrarGerente(this.usuarios);
         console.log(resp);
       }
 

@@ -1,13 +1,6 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, set } from "firebase/database";
-import { Culto, UserResponse, Usuario } from "src/app/models/models";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { Injectable } from "@angular/core";
-
 export const environment = {
   production: false,
   firebase: {
@@ -21,80 +14,3 @@ export const environment = {
     measurementId: "G-7LYWJBWYVL"
   }
 };
-
-const app = initializeApp(environment.firebase);
-export const db = getDatabase();
-export const auth = getAuth(app);
-
-export function criarCulto(data: Culto) {
-  const { v4: uuidv4 } = require('uuid');
-  set(ref(db, 'cultos/' + uuidv4()), {
-    titulo: data.titulo,
-    descricao: data.descricao,
-    data: data.data,
-    hora: data.hora
-  }).then(d => {
-    console.log('>>>>>>>>>>>', d)
-  });
-}
-
-export function criaGerente(data: Usuario) {
-  createUserWithEmailAndPassword(auth, data.email, data.senha)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log('login do usuarop', userCredential);
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    // ..
-  });
-}
-
-export function entrarGerente(us: Usuario) {
-  signInWithEmailAndPassword(auth, us.email, us.senha)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-}
-
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthService {
-  private async registrar(usuario: Usuario) {
-    try {
-      return  {
-        result: await createUserWithEmailAndPassword(auth,
-          usuario.email, usuario.senha)
-      } as UserResponse;
-    } catch (e) {
-      console.log(e);
-      return  {
-        error: e
-      } as UserResponse;
-    }
-  }
-}
-
-// export function buscaUsuario(){
-
-//   ref(db, 'users/1').once('value')
-//   .then((snapshot) => {
-//     const userData = snapshot.val();
-//     console.log(userData);
-//   })
-//   .catch((error) => {
-//     console.error('Erro ao ler dados:', error);
-//   });
-// }
-

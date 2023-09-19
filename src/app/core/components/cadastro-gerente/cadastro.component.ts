@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
-import { criaGerente } from 'src/environments/environment';
+import { Services } from '../../shared/services.service';
 import { Usuario } from 'src/app/models/models';
 
 @Component({
@@ -19,7 +19,7 @@ export class CadastroComponent implements OnInit {
 
   component = LoginComponent;
 
-  //constructor() { }
+  constructor(private service: Services) { }
 
   ngOnInit() { }
 
@@ -35,7 +35,7 @@ export class CadastroComponent implements OnInit {
         senha: this.senha
       }
 
-      criaGerente(this.usuarios);
+      this.service.criaGerente(this.usuarios);
 
       console.log("Nome:", this.nome);
       console.log("E-mail:", this.email);
