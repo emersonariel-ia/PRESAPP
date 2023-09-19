@@ -9,6 +9,7 @@ export class CabecalhoComponent implements OnInit {
 
   @Input() titulo?: string = "Betânia";
   @Input() urlBack?: string = "/";
+  @Input() nomeUser?: string = "";
 
   constructor() { }
 

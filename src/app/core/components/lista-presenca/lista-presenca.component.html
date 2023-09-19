@@ -1,0 +1,17 @@
+<app-cabecalho [titulo]="titulo" [nomeUser]="nomeUsuarioLogado"></app-cabecalho>
+
+<ion-content>
+  <ion-list>
+    <!-- Exemplo de lista de presença com ion-checkbox -->
+    <ion-item *ngFor="let membro of membros">
+      <ion-checkbox [(ngModel)]="membro.isPresent" color="primary"></ion-checkbox>
+      <ion-label> {{ membro.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="submitList()">Enviar Lista</ion-button>
+  </ion-toolbar>
+</ion-footer>

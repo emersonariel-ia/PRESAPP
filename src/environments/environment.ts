@@ -40,31 +40,33 @@ export function criarCulto(data: Culto) {
 
 export function criaGerente(data: Usuario) {
   createUserWithEmailAndPassword(auth, data.email, data.senha)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log('login do usuarop', userCredential);
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    // ..
-  });
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log('login do usuarop', userCredential);
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+      // ..
+    });
 }
 
 export function entrarGerente(us: Usuario) {
   signInWithEmailAndPassword(auth, us.email, us.senha)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+    .then((userCredential) => {
+      // Signed in 
+      //const user = userCredential.user;
+      return true;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      return false;
+    });
 }
 
 @Injectable({
@@ -73,13 +75,13 @@ export function entrarGerente(us: Usuario) {
 export class AuthService {
   private async registrar(usuario: Usuario) {
     try {
-      return  {
+      return {
         result: await createUserWithEmailAndPassword(auth,
           usuario.email, usuario.senha)
       } as UserResponse;
     } catch (e) {
       console.log(e);
-      return  {
+      return {
         error: e
       } as UserResponse;
     }

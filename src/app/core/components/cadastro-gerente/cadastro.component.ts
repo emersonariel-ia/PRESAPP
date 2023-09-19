@@ -2,6 +2,8 @@ import { Component, OnInit, Output } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { criaGerente } from 'src/environments/environment';
 import { Usuario } from 'src/app/models/models';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cadastro',
@@ -21,11 +23,16 @@ export class CadastroComponent implements OnInit {
 
   @Output() titulo = "Cadastro Gerente";
 
-  //constructor() { }
-
+  constructor(private router: Router, private toastController: ToastController) { }
+  public toastButtons = [
+    {
+      text: 'fechar',
+      role: 'cancel',
+    },
+  ];
   ngOnInit() { }
 
-  onSubmit() {
+  async onSubmit() {
 
     if (this.senha !== this.repetirSenha) {
       console.error("As senhas não coincidem.");
@@ -39,9 +46,18 @@ export class CadastroComponent implements OnInit {
 
       criaGerente(this.usuarios);
 
-      console.log("Nome:", this.nome);
-      console.log("E-mail:", this.email);
-      console.log("Senha:", this.senha);
+      const toast = await this.toastController.create({
+        message: 'Gerente cadastrado com sucesso.',
+        duration: 5000,
+        position: 'bottom',
+        cssClass: 'success-toast',
+        buttons: this.toastButtons
+      });
+
+      await toast.present();
+
+      // Redirecionar para a próxima página após o login
+      //this.router.navigate(['/login']);
     }
   }
 }
