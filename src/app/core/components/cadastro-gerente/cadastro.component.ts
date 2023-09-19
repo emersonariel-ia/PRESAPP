@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
-import { criaGerente } from 'src/environments/environment';
+import { Services } from '../../shared/services.service';
 import { Usuario } from 'src/app/models/models';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -23,7 +23,7 @@ export class CadastroComponent implements OnInit {
 
   @Output() titulo = "Cadastro Gerente";
 
-  constructor(private router: Router, private toastController: ToastController) { }
+  constructor(private router: Router, private toastController: ToastController, private service: Services) { }
   public toastButtons = [
     {
       text: 'fechar',
@@ -44,7 +44,7 @@ export class CadastroComponent implements OnInit {
         senha: this.senha
       }
 
-      criaGerente(this.usuarios);
+      this.service.criaGerente(this.usuarios);
 
       const toast = await this.toastController.create({
         message: 'Gerente cadastrado com sucesso.',

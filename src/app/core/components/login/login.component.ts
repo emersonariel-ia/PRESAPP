@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/models';
-import { entrarGerente } from 'src/environments/environment';
 import { UserService } from '../../shared/userDados/user.service';
 import { Router } from '@angular/router';
+import { Services } from '../../shared/services.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private service: Services) { }
 
   nome?: string;
   email?: string;
@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
         senha: senha
       }
 
-      entrarGerente(this.usuarios);
+      this.service.entrarGerente(this.usuarios);
+      const resp = this.service.entrarGerente(this.usuarios);
       this.userService.userData = {
         UsuarioLogado: {
           nome: 'Émerson',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { MembroComponent } from '../membro/membro.component';
-import { criarCulto } from 'src/environments/environment';
+import { Services } from '../../shared/services.service';
 import { Culto } from 'src/app/models/models';
 import { IonDatetime } from '@ionic/angular';
 
@@ -11,7 +11,7 @@ import { IonDatetime } from '@ionic/angular';
 })
 export class CultoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: Services) { }
 
   titulo?: string;
   descricao?: string;
@@ -42,6 +42,7 @@ export class CultoComponent implements OnInit {
     //console.log(this.datePicker.value)
     //criarCulto(this.culto);
 
+    this.service.criarCulto(this.culto);
     // Faça algo com os valores do formulário (por exemplo, enviar para um serviço de registro)
 
   }
