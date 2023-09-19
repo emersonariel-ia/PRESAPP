@@ -24,12 +24,13 @@ export class Tab2Page {
     this.eventos = this.afDatabase.object('/eventos');
 
     // Leia os dados do objeto
-    this.eventos.valueChanges().subscribe((data: any) => {
+    this.eventos.valueChanges().subscribe((data: Culto) => {
       this.cultos = [];
       Object.entries(data).map(d => {
-        this.cultos.push(d[1]);
+        var objDado = d[1];
+        this.cultos.push(Object.assign(objDado, { codEvento: d[0] }));
       })
-      // console.log('Dados do objeto:', this.cultos);
+      console.log('Dados do objeto:', this.cultos);
     });
   }
 

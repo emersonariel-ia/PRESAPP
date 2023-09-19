@@ -14,6 +14,7 @@ export class Culto {
   responsavel?: string;
   data?: Date;
   tipo?: number;
+  codEvento?: number;
 
   constructor() {
 

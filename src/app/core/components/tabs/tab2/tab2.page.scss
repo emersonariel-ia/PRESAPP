@@ -1,3 +1,13 @@
 ion-card-subtitle {
-    font-size: 18px;
+    font-size: 1.8em;
+    padding-bottom: 10px;
+}
+
+.icon-container {
+    display: flex;
+    /* Usar flexbox para alinhar os ícones horizontalmente */
+    align-items: center;
+    /* Alinhar os ícones verticalmente ao centro */
+    gap: 5px;
+    /* Espaço entre os ícones (ajuste conforme necessário) */
 }

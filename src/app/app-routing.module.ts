@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'registro-culto', component: CultoComponent },
   { path: 'cadastro-membro', component: CadastroMembroComponent },
-  { path: 'lista-presenca', component: ListaPresencaComponent },
+  //{ path: 'lista-presenca', component: ListaPresencaComponent },
 ];
 @NgModule({
   imports: [
