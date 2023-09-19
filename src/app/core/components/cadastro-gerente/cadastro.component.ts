@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
 import { Services } from '../../shared/services.service';
 import { Usuario } from 'src/app/models/models';
@@ -20,6 +20,9 @@ export class CadastroComponent implements OnInit {
   component = LoginComponent;
 
   constructor(private service: Services) { }
+
+  @Output() titulo = "Cadastro Gerente";
+
 
   ngOnInit() { }
 

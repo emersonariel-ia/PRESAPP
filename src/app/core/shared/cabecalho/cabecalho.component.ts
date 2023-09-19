@@ -7,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CabecalhoComponent implements OnInit {
 
-  @Input() titulo?: string;
+  @Input() titulo?: string = "Betânia";
+  @Input() urlBack?: string = "/";
 
   constructor() { }
 
