@@ -44,17 +44,29 @@ export class CadastroComponent implements OnInit {
         senha: this.senha
       }
 
-      this.service.criaGerente(this.usuarios);
+      let resp = this.service.criaGerente(this.usuarios);
+      console.log(resp);
+      if (resp === 1) {
+        const toast = await this.toastController.create({
+          message: 'Gerente cadastrado com sucesso.',
+          duration: 5000,
+          position: 'bottom',
+          cssClass: 'success-toast',
+          buttons: this.toastButtons
+        });
 
-      const toast = await this.toastController.create({
-        message: 'Gerente cadastrado com sucesso.',
-        duration: 5000,
-        position: 'bottom',
-        cssClass: 'success-toast',
-        buttons: this.toastButtons
-      });
+        await toast.present();
+      } else {
+        const toast = await this.toastController.create({
+          message: 'Erro ao criar gerente',
+          duration: 5000,
+          position: 'bottom',
+          cssClass: 'error-toast',
+          buttons: this.toastButtons
+        });
 
-      await toast.present();
+        await toast.present();
+      }
 
       // Redirecionar para a próxima página após o login
       //this.router.navigate(['/login']);

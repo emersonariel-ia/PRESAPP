@@ -95,10 +95,6 @@ export class Services {
   }
 
   criarMembro(data: Membro): number {
-    // if (data.ministerio?.length == 0) {
-    //   this.serviceMensagem.mensagemDeSucesso('Membro cadastrado com sucesso.');
-    //   this.serviceMensagem.mensagemDeErroSenhaForaPadrao('Campos não foram preenchidos');
-    // }
     const { v4: uuidv4 } = require('uuid');
     const ob = set(ref(this.db, 'membros/' + uuidv4()), {
       name: data.name,
@@ -129,13 +125,8 @@ export class Services {
     });
   }
 
-  // Função para criar dados generica
-  alteraDataBase() {
-
-  }
-
   listaDeDados = [];
-  // Função para criar dados generica
+
   consultaDataBase(pCaminho: string) {
     var objDados = this.afDatabase.object(pCaminho);
     objDados.valueChanges().subscribe((data: any) => {
@@ -143,8 +134,6 @@ export class Services {
       Object.entries(data)
         .map(dado => {
           console.log('consultaDataBase:', Object.assign(dado));
-
-          //this.listaDeDados.push(Object.assign(d));//, { codMembro: d[0] }));
         })
     });;
   }

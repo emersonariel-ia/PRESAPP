@@ -45,7 +45,6 @@ export class CultoComponent implements OnInit {
     } else {
       this.serviceMensagem.mensagemDeErroSenhaForaPadrao("Algo deu errado!");
     }    
-
   }
 
   dateChanged(event: any) {
