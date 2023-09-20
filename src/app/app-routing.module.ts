@@ -3,9 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './core/components/login/login.component';
 import { CadastroComponent } from './core/components/cadastro-gerente/cadastro.component';
 import { RelatoriosComponent } from './core/components/relatorios/relatorios.component';
-import { CultoComponent } from './core/components/culto/culto.component';
-import { CadastroMembroComponent } from './core/components/cadastro-membro/cadastro-membro.component';
-import { ListaPresencaComponent } from './core/components/lista-presenca/lista-presenca.component';
 
 const routes: Routes = [
   //{ path: '', component: HomeComponent },
@@ -13,9 +10,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cadastro-gerente', component: CadastroComponent },
   { path: 'relatorios', component: RelatoriosComponent },
-  { path: 'registro-culto', component: CultoComponent },
-  { path: 'cadastro-membro', component: CadastroMembroComponent },
-  //{ path: 'lista-presenca', component: ListaPresencaComponent },
 ];
 @NgModule({
   imports: [

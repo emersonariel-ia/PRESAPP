@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { ListaPresencaComponent } from '../lista-presenca/lista-presenca.component';
+import { CadastroMembroComponent } from '../cadastro-membro/cadastro-membro.component';
+import { CultoComponent } from '../culto/culto.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,14 @@ const routes: Routes = [
       {
         path: 'lista-presenca',
         component: ListaPresencaComponent
+      },
+      {
+        path: 'cadastro-membro',
+        component: CadastroMembroComponent
+      },
+      {
+        path: 'registro-culto',
+        component: CultoComponent
       },
       {
         path: '',
