@@ -59,7 +59,6 @@ export class CadastroMembroComponent implements OnInit {
       this.ministerioSelecionados = [];
 
       this.serviceMensagem.mensagemDeSucesso('Membro cadastrado com sucesso.');
-    }
-
+    } 
   }
 }

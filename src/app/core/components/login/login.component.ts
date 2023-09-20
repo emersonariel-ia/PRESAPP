@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
       }
 
       this.service.entrarGerente(this.usuarios);
-      const resp = this.service.entrarGerente(this.usuarios);
       this.userService.userData = {
         UsuarioLogado: {
           nome: 'Émerson',
@@ -43,10 +42,7 @@ export class LoginComponent implements OnInit {
           senha: this.senha
         }
       }
-
-      // Redirecionar para a próxima página após o login
       this.router.navigate(['/']);
-      //console.log(this.userService.userData);
     }
   }
 }

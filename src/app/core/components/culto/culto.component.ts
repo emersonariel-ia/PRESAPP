@@ -3,6 +3,7 @@ import { MembroComponent } from '../membro/membro.component';
 import { Services } from '../../shared/servicos/services.service';
 import { Culto } from 'src/app/models/models';
 import { IonDatetime } from '@ionic/angular';
+import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensagem-toast.service';
 
 @Component({
   selector: 'app-culto',
@@ -11,7 +12,7 @@ import { IonDatetime } from '@ionic/angular';
 })
 export class CultoComponent implements OnInit {
 
-  constructor(private service: Services) { }
+  constructor(private service: Services, private serviceMensagem: MensagemToastService) { }
 
   titulo?: string;
   responsavel?: string;
@@ -31,18 +32,19 @@ export class CultoComponent implements OnInit {
 
   onSubmit() {
 
-    //console.log('data', this.data)
     this.culto = {
       titulo: this.titulo,
       data: this.data,
       responsavel: this.responsavel,
       tipo: 1,
     };
-    //this.selectedDateTime =  
-    //criarCulto(this.culto);
-
-    this.service.criarCulto(this.culto);
-    // Faça algo com os valores do formulário (por exemplo, enviar para um serviço de registro)
+    let resp = 0;
+    resp = this.service.criarCulto(this.culto);
+    if (resp == 1) {
+      this.serviceMensagem.mensagemDeSucesso('Culto Agendado!');
+    } else {
+      this.serviceMensagem.mensagemDeErroSenhaForaPadrao("Algo deu errado!");
+    }    
 
   }
 

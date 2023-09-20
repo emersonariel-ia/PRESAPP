@@ -27,4 +27,16 @@ export class MensagemToastService {
 
     await toast.present();
   }
+
+  async mensagemDeErroSenhaForaPadrao(pMessange: string, pPosition: ToastPosition = 'bottom', pDuration: number = 4000) {
+    const toast = await this.toastController.create({
+      message: pMessange,
+      duration: pDuration,
+      position: pPosition,
+      cssClass: 'error-toast',
+      buttons: this.toastButtons
+    });
+
+    await toast.present();
+  }
 }

@@ -1,19 +1,18 @@
-import { ObserversModule } from '@angular/cdk/observers';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { getDatabase, ref, onValue, set, get } from 'firebase/database';
-import { Observable } from 'rxjs';
 import { Culto, Usuario, UserResponse, Membro } from 'src/app/models/models';
 import { environment } from 'src/environments/environment';
+import { MensagemToastService } from './mensagemToast/mensagem-toast.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Services {
 
-  constructor(private afDatabase: AngularFireDatabase) { }
+  constructor(private afDatabase: AngularFireDatabase, private serviceMensagem: MensagemToastService) { }
 
   app = initializeApp(environment.firebase);
   db = getDatabase();
@@ -41,7 +40,7 @@ export class Services {
     return this.cultos;
   }
 
-  criarCulto(data: Culto) {
+  criarCulto(data: Culto): number {
     const { v4: uuidv4 } = require('uuid');
     const ob = set(ref(this.db, 'eventos/' + uuidv4()), {
       titulo: data.titulo,
@@ -50,41 +49,56 @@ export class Services {
       tipo: 1
     }).then(d => {
       console.log(ob)
-    });
+      return 1;
+    }).catch((error) => {
+      console.log(error);
+      return 0;
+    })
+
+    return 1;
   }
 
-  criaGerente(data: Usuario) {
+  criaGerente(data: Usuario): number {
     createUserWithEmailAndPassword(this.auth, data.email, data.senha)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         console.log('login do usuario', userCredential);
-        // ...
+        return 1;
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        // ..
+        return 0;
       });
+
+      return 1;
   }
 
-  entrarGerente(us: Usuario) {
+  entrarGerente(us: Usuario): number {
     signInWithEmailAndPassword(this.auth, us.email, us.senha)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         console.log(userCredential.user)
-        // ...
+        return 1;
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        return 0;
       });
+
+      return 1;
   }
 
   criarMembro(data: Membro): number {
+    // if (data.ministerio?.length == 0) {
+    //   this.serviceMensagem.mensagemDeSucesso('Membro cadastrado com sucesso.');
+    //   this.serviceMensagem.mensagemDeErroSenhaForaPadrao('Campos não foram preenchidos');
+    // }
     const { v4: uuidv4 } = require('uuid');
     const ob = set(ref(this.db, 'membros/' + uuidv4()), {
       name: data.name,
@@ -97,7 +111,7 @@ export class Services {
       return 1;
     }).catch(err => {
       console.log('err', err)
-      return 0;
+      return 0;      
     });
 
     console.log('ob', ob)
