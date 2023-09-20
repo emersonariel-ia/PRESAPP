@@ -1,6 +1,12 @@
 import { Component, Output } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/shared/userDados/user.service';
+import { Eventos } from 'src/app/models/eventos';
+import { take } from 'rxjs/operators'; // Importe a função take
+import { format } from 'date-fns';
+import { LoadingService } from 'src/app/core/shared/servicos/loading/loading.service';
+import { FormatacaoEConversaoService } from 'src/app/core/shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +18,29 @@ export class HomePage {
   @Output() titulo: string = '';
   @Output() nomeUsuarioLogado: string = this.userService.userData != null ? this.userService.userData.UsuarioLogado.nome : 'teste 12';
 
-  constructor(private router: Router, private userService: UserService) { }
+  objEvento: any[] = [];
+  exibeConteudo: boolean = false;
 
-  ngOnInit() {
-    console.log('dados', this.userService.userData);
+  constructor(private router: Router, private userService: UserService, private afDatabase: AngularFireDatabase, private loadingService: LoadingService, private formatacaoOuConvercao: FormatacaoEConversaoService) { }
+
+  async ngOnInit() {
+    await this.loadingService.exibirLoading();
+
+    this.afDatabase
+      .list('/eventos', (ref) => ref.orderByChild('data').limitToLast(1)) // Substitua o caminho e o limite conforme necessário
+      .snapshotChanges()
+      .pipe(take(1)) // Use take para limitar a 5 itens
+      .subscribe((snapshots) => {
+        snapshots.forEach((snapshot: any) => {
+          // A chave está disponível em snapshot.key
+          const codEvento = snapshot.key;
+          const dadosEvento = Object.assign({}, snapshot.payload.val());
+          this.objEvento.push(Object.assign(dadosEvento, { codEvento: codEvento }));
+        });
+
+        this.exibeConteudo = true;
+        this.loadingService.esconderLoading();
+      });
   }
 
   irParaPaginaDeLogin() {
@@ -23,4 +48,7 @@ export class HomePage {
     this.router.navigate(['/login']); // Exemplo de navegação para a página de login
   }
 
+  formatDate(dateString: string): string {
+    return this.formatacaoOuConvercao.formatDate(dateString);
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
-import { Services } from '../../shared/services.service';
+import { Services } from '../../shared/servicos/services.service';
 import { Usuario } from 'src/app/models/models';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';

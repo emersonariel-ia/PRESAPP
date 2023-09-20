@@ -5,8 +5,8 @@ export interface Membro {
   name?: string;
   frequenciaPorcentagem?: number;
   qtDiasComparecidos?: number;
-  ministerio?: string;
-  dataIngresso?: string
+  ministerio?: string[];
+  dataIngresso?: Date
 }
 
 export class Culto {

@@ -1,9 +1,10 @@
 import { Component, Output } from '@angular/core';
-import { Services } from 'src/app/core/shared/services.service';
+import { Services } from 'src/app/core/shared/servicos/services.service';
 import { Culto } from 'src/app/models/models';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable, map } from 'rxjs';
 import { format } from 'date-fns';
+import { FormatacaoEConversaoService } from 'src/app/core/shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
 
 @Component({
   selector: 'app-tab2',
@@ -17,7 +18,7 @@ export class Tab2Page {
   cultos: any = [];
   eventos: any = [];
 
-  constructor(private service: Services, private afDatabase: AngularFireDatabase) { }
+  constructor(private service: Services, private afDatabase: AngularFireDatabase, private formatacaoOuConvercao: FormatacaoEConversaoService) { }
 
   ngOnInit() {
     //this.cultos = this.afDatabase.list('/eventos');
@@ -30,13 +31,12 @@ export class Tab2Page {
         var objDado = d[1];
         this.cultos.push(Object.assign(objDado, { codEvento: d[0] }));
       })
-      console.log('Dados do objeto:', this.cultos);
+      console.log('Dados do objeto:', this.cultos[1].presenca);
     });
   }
 
   formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return format(date, 'dd/MM/yyyy HH:mm');
+    return this.formatacaoOuConvercao.formatDate(dateString);
   }
 }
 

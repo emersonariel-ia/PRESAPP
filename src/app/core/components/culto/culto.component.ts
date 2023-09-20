@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { MembroComponent } from '../membro/membro.component';
-import { Services } from '../../shared/services.service';
+import { Services } from '../../shared/servicos/services.service';
 import { Culto } from 'src/app/models/models';
 import { IonDatetime } from '@ionic/angular';
 

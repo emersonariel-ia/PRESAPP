@@ -1,8 +1,7 @@
-
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/create_mem"></ion-back-button>
+      <ion-back-button defaultHref="/"></ion-back-button>
       <ion-title>
         Cadastro Membro
       </ion-title>
@@ -14,13 +13,21 @@
   <form (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
-      <ion-input [(ngModel)]="nome" label-placement="floating" name="nome" type="text" required></ion-input>
+      <ion-input [(ngModel)]="nome" label-placement="floating" name="nome" type="text"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Ministério</ion-label>
       <ion-input [(ngModel)]="ministerio" label-placement="floating" name="ministerio" type="text" required></ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-select label="Selecione ministério" [interfaceOptions]="customActionSheetOptions" interface="action-sheet"
+        placeholder="Selecione" multiple="true" [(ngModel)]="ministerioSelecionados" name="ministerioSelecionados">
+        <ion-select-option *ngFor="let ministerio of listaMinisterios"
+          value="{{ministerio.codigo}}">{{ministerio.nome}}</ion-select-option>
+      </ion-select>
     </ion-item>
+
 
     <ion-button type="submit" color="primary" class="ion-padding-top" expand="block">Salvar</ion-button>
   </form>

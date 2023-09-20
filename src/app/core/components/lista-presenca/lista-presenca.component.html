@@ -1,11 +1,12 @@
-<app-cabecalho [titulo]="titulo" [nomeUser]="nomeUsuarioLogado"></app-cabecalho>
+<app-cabecalho [titulo]="titulo"></app-cabecalho>
 
 <ion-content>
   <ion-list>
     <!-- Exemplo de lista de presença com ion-checkbox -->
-    <ion-item *ngFor="let membro of membros">
-      <ion-checkbox [(ngModel)]="membro.isPresent" color="primary"></ion-checkbox>
-      <ion-label> {{ membro.name }}</ion-label>
+    <ion-item *ngFor="let membro of listaDePresenca">
+      <ion-checkbox [(ngModel)]="membro.presencaConfirmada" (ionChange)="checkboxChanged($event, membro.codMembro)"
+        color="primary" checked="{{membro.presencaConfirmada}}"></ion-checkbox>
+      <ion-label> {{ membro.nome }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

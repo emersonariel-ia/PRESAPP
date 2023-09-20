@@ -6,10 +6,10 @@
     <ion-card-header>
       <ion-card-subtitle color="primary">{{culto.titulo}}</ion-card-subtitle>
       <div class="icon-container">
-        <a href="/tabs/lista-presenca?culto={{culto.codEvento}}&modo=novo">
+        <a *ngIf="!culto.presenca" href="/tabs/lista-presenca?codEvento={{culto.codEvento}}&modo=novo">
           <ion-icon name="create" size="large"></ion-icon>
         </a>
-        <a href="/tabs/lista-presenca?culto={{culto.codEvento}}&modo=editar">
+        <a *ngIf="culto.presenca" href="/tabs/lista-presenca?codEvento={{culto.codEvento}}&modo=editar">
           <ion-icon name="checkmark-done-circle" size="large"></ion-icon>
         </a>
       </div>
