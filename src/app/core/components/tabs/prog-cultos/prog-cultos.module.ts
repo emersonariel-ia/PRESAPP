@@ -2,10 +2,10 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './tab2.page';
+import { ProgCultos } from './prog-cultos.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { ProgCultosPageRoutingModule } from './prog-cultos-routing.module';
 import { SharedModule } from 'src/app/core/shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from 'src/app/core/shared/shared.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule,
+    ProgCultosPageRoutingModule,
     SharedModule
   ],
-  declarations: [Tab2Page]
+  declarations: [ProgCultos]
 })
 export class Tab2PageModule { }

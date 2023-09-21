@@ -59,21 +59,23 @@ export class Services {
   }
 
   criaGerente(data: Usuario): number {
+    let resp = 3;
     createUserWithEmailAndPassword(this.auth, data.email, data.senha)
-      .then((userCredential) => {
+      .then(() => {
         // Signed in 
-        const user = userCredential.user;
-        console.log('login do usuario', userCredential);
-        return 1;
+        // const user = userCredential.user;
+        // console.log('login do usuario', userCredential);
+        resp = 1;
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        return 0;
+        resp = 0;
       });
 
-    return 1;
+    console.log('resposta', resp);
+    return resp;
   }
 
   entrarGerente(us: Usuario): number {
