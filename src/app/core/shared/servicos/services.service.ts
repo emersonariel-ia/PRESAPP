@@ -73,7 +73,7 @@ export class Services {
         return 0;
       });
 
-      return 1;
+    return 1;
   }
 
   entrarGerente(us: Usuario): number {
@@ -91,7 +91,7 @@ export class Services {
         return 0;
       });
 
-      return 1;
+    return 1;
   }
 
   criarMembro(data: Membro): number {
@@ -107,7 +107,7 @@ export class Services {
       return 1;
     }).catch(err => {
       console.log('err', err)
-      return 0;      
+      return 0;
     });
 
     console.log('ob', ob)

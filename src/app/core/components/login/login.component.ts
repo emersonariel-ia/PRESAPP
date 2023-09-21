@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/models/models';
 import { UserService } from '../../shared/userDados/user.service';
 import { Router } from '@angular/router';
 import { Services } from '../../shared/servicos/services.service';
+import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensagem-toast.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Services } from '../../shared/servicos/services.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router, private service: Services) { }
+  constructor(private userService: UserService, private router: Router, private service: Services, private serviceMensagem: MensagemToastService) { }
 
   nome?: string;
   email?: string;
@@ -34,15 +35,20 @@ export class LoginComponent implements OnInit {
         senha: senha
       }
 
-      this.service.entrarGerente(this.usuarios);
-      this.userService.userData = {
-        UsuarioLogado: {
-          nome: 'Émerson',
-          email: this.email,
-          senha: this.senha
+      const retornoLogin = this.service.entrarGerente(this.usuarios);
+      if (retornoLogin == 1) {
+        this.userService.logado = true;
+
+        this.userService.userData = {
+          UsuarioLogado: {
+            nome: 'Émerson',
+            email: this.email,
+            senha: this.senha
+          }
         }
       }
-      this.router.navigate(['/']);
+
+      this.serviceMensagem.mensagemDeSucesso('Usuário logado com sucesso!', 'bottom', 1000, '/')
     }
   }
 }

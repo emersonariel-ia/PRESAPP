@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ToastPosition } from '@ionic/core';
 
@@ -7,7 +8,7 @@ import { ToastPosition } from '@ionic/core';
 })
 export class MensagemToastService {
 
-  constructor(private toastController: ToastController) { }
+  constructor(private toastController: ToastController, private router: Router) { }
 
   public toastButtons = [
     {
@@ -16,7 +17,7 @@ export class MensagemToastService {
     },
   ];
 
-  async mensagemDeSucesso(pMessange: string, pPosition: ToastPosition = 'bottom', pDuration: number = 5000) {
+  async mensagemDeSucesso(pMessange: string, pPosition: ToastPosition = 'bottom', pDuration: number = 5000, pUrlNavigation: string = '') {
     const toast = await this.toastController.create({
       message: pMessange,
       duration: pDuration,
@@ -26,6 +27,12 @@ export class MensagemToastService {
     });
 
     await toast.present();
+
+    if (pUrlNavigation != '') {
+      await toast.onDidDismiss();
+
+      this.router.navigate([pUrlNavigation]);
+    }
   }
 
   async mensagemDeErroSenhaForaPadrao(pMessange: string, pPosition: ToastPosition = 'bottom', pDuration: number = 4000) {

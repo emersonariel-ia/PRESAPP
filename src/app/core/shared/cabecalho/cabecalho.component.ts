@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../userDados/user.service';
 
 @Component({
   selector: 'app-cabecalho',
@@ -12,10 +13,12 @@ export class CabecalhoComponent implements OnInit {
   @Input() urlBack?: string = "/";
   @Input() nomeUser?: string = "";
 
-  constructor(private router: Router) { }
+  usuarioLogado: boolean = this.userService.logado;
+
+  constructor(private router: Router, private userService: UserService) { }
 
   paraLogin() {
-    
+
   }
   ngOnInit() {
   }

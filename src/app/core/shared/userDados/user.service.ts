@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   userData: any;
-  logado!: boolean;
+  logado: boolean = false;
 
   constructor() { }
 }
