@@ -40,3 +40,19 @@ ion-toast.success-toast::part(button) {
     color: #030207;
     font-size: 15px;
 }
+
+ion-toast.error-toast {
+    --background: #ff0101;
+    --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --color: #ffffff;
+}
+
+ion-toast.error-toast::part(message) {
+    font-style: italic;
+}
+
+ion-toast.error-toast::part(button) {
+    border-left: 1px solid #d2d2d2;
+    color: #ffffff;
+    font-size: 15px;
+}

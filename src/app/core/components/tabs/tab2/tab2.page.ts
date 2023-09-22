@@ -5,6 +5,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable, map } from 'rxjs';
 import { format } from 'date-fns';
 import { FormatacaoEConversaoService } from 'src/app/core/shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
+import { LoadingService } from 'src/app/core/shared/servicos/loading/loading.service';
 
 @Component({
   selector: 'app-tab2',
@@ -18,20 +19,22 @@ export class Tab2Page {
   cultos: any = [];
   eventos: any = [];
 
-  constructor(private service: Services, private afDatabase: AngularFireDatabase, private formatacaoOuConvercao: FormatacaoEConversaoService) { }
+  constructor(private service: Services, private afDatabase: AngularFireDatabase, private formatacaoOuConvercao: FormatacaoEConversaoService, private loadingService: LoadingService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.loadingService.exibirLoading();
     //this.cultos = this.afDatabase.list('/eventos');
-    this.eventos = this.afDatabase.object('/eventos');
+    this.eventos = this.afDatabase.list('/eventos', (ref) => ref.orderByChild('data').limitToLast(10));
 
     // Leia os dados do objeto
     this.eventos.valueChanges().subscribe((data: Culto) => {
+      console.log('Dados do objeto:', data);
       this.cultos = [];
       Object.entries(data).map(d => {
         var objDado = d[1];
         this.cultos.push(Object.assign(objDado, { codEvento: d[0] }));
       })
-      console.log('Dados do objeto:', this.cultos[1].presenca);
+      this.loadingService.esconderLoading();
     });
   }
 

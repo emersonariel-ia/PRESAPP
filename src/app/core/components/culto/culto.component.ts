@@ -4,6 +4,8 @@ import { Services } from '../../shared/servicos/services.service';
 import { Culto } from 'src/app/models/models';
 import { IonDatetime } from '@ionic/angular';
 import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensagem-toast.service';
+import { format } from 'date-fns';
+import { FormatacaoEConversaoService } from '../../shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
 
 @Component({
   selector: 'app-culto',
@@ -12,7 +14,7 @@ import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensag
 })
 export class CultoComponent implements OnInit {
 
-  constructor(private service: Services, private serviceMensagem: MensagemToastService) { }
+  constructor(private service: Services, private serviceMensagem: MensagemToastService, private formatacaoOuConvercao: FormatacaoEConversaoService) { }
 
   titulo?: string;
   responsavel?: string;
@@ -31,20 +33,31 @@ export class CultoComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit() {
+    // Valida se todos os campos estão preenchidos
+    if (this.titulo != '' && this.data != undefined && this.responsavel != '') {
+      this.culto = {
+        titulo: this.titulo,
+        data: this.data,
+        responsavel: this.responsavel,
+        tipo: 1,
+      };
+      let resp = 0;
+      resp = this.service.criarCulto(this.culto);
+      if (resp == 1) {
 
-    this.culto = {
-      titulo: this.titulo,
-      data: this.data,
-      responsavel: this.responsavel,
-      tipo: 1,
-    };
-    let resp = 0;
-    resp = this.service.criarCulto(this.culto);
-    if (resp == 1) {
-      this.serviceMensagem.mensagemDeSucesso('Culto Agendado!');
-    } else {
-      this.serviceMensagem.mensagemDeErroSenhaForaPadrao("Algo deu errado!");
-    }    
+        this.titulo = '';
+        this.data = new Date();
+        this.responsavel = '';
+
+        this.serviceMensagem.mensagemDeSucesso('Culto Agendado!');
+      } else {
+        this.serviceMensagem.mensagemDeErroSenhaForaPadrao("Algo deu errado!");
+      }
+    }
+    else {
+      this.serviceMensagem.mensagemDeErroSenhaForaPadrao("Todos os campos precisam estar preenchidos!", 'bottom', 4000);
+    }
+
   }
 
   dateChanged(event: any) {

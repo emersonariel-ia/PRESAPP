@@ -4,21 +4,22 @@
   <form (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">Titulo Ministração</ion-label>
-      <ion-input [(ngModel)]="titulo" label-placement="floating" name="Titulo" type="text" required></ion-input>
+      <ion-input [(ngModel)]="titulo" label-placement="floating" name="Titulo" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Responsável</ion-label>
-      <ion-input [(ngModel)]="responsavel" name="responsavel" type="text" required></ion-input>
+      <ion-input [(ngModel)]="responsavel" name="responsavel" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="fixed">Data e hora</ion-label>
     </ion-item>
     <ion-item>
-      <ion-datetime displayFormat="DD/MM/YYYY HH:mm" [(ngModel)]="data" name="data" required></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY HH:mm" [(ngModel)]="data" name="data"></ion-datetime>
     </ion-item>
 
-    <ion-button type="submit" color="primary" class="ion-padding-top" expand="block">Agendar</ion-button>
+    <ion-button id="btnAgendar" type="submit" color="primary" class="ion-padding-top"
+      expand="block">Agendar</ion-button>
   </form>
 </ion-content>

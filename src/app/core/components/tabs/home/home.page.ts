@@ -16,7 +16,9 @@ import { FormatacaoEConversaoService } from 'src/app/core/shared/servicos/format
 export class HomePage {
 
   @Output() titulo: string = '';
-  @Output() nomeUsuarioLogado: string = this.userService.userData != null ? this.userService.userData.UsuarioLogado.nome : 'teste 12';
+  @Output() nomeUsuarioLogado: string = this.userService.userData != null ? this.userService.userData.UsuarioLogado.nome : '';
+
+  usuarioLogado: boolean = this.userService.logado;
 
   objEvento: any[] = [];
   exibeConteudo: boolean = false;

@@ -8,10 +8,10 @@
       <ion-card-subtitle>{{ formatDate(evento.data) }}</ion-card-subtitle>
     </ion-card-header>
 
-    <a *ngIf="!evento.presenca" href="/tabs/lista-presenca?codEvento={{evento.codEvento}}&modo=novo">
+    <a *ngIf="!evento.presenca && usuarioLogado" href="/tabs/lista-presenca?codEvento={{evento.codEvento}}&modo=novo">
       <ion-icon name="create" size="large"></ion-icon>
     </a>
-    <a *ngIf="evento.presenca" href="/tabs/lista-presenca?codEvento={{evento.codEvento}}&modo=editar">
+    <a *ngIf="evento.presenca && usuarioLogado" href="/tabs/lista-presenca?codEvento={{evento.codEvento}}&modo=editar">
       <ion-icon name="checkmark-done-circle" size="large"></ion-icon>
     </a>
   </ion-card>
@@ -28,7 +28,7 @@
   </ion-card> -->
 </ion-content>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+<ion-fab *ngIf="usuarioLogado" slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button>
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
