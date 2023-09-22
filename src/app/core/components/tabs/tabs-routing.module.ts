@@ -16,7 +16,7 @@ const routes: Routes = [
       },
       {
         path: 'tab2',
-        loadChildren: () => import('../tabs/tab2/tab2.module').then(m => m.Tab2PageModule)
+        loadChildren: () => import('./prog-cultos/prog-cultos.module').then(m => m.Tab2PageModule)
       },
       {
         path: 'relatorios',

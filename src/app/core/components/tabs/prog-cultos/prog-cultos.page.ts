@@ -9,10 +9,10 @@ import { LoadingService } from 'src/app/core/shared/servicos/loading/loading.ser
 
 @Component({
   selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  templateUrl: 'prog-cultos.page.html',
+  styleUrls: ['prog-cultos.page.scss']
 })
-export class Tab2Page {
+export class ProgCultos {
 
   @Output() titulo: string = 'Programação de culto';
 
