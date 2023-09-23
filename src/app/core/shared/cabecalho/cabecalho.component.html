@@ -8,8 +8,11 @@
     </ion-buttons>
     <ion-button *ngIf="!usuarioLogado" href="/login">Login</ion-button>
     <ion-buttons slot="end">
-      <ion-title>
-        {{nomeUser}}
+      <ion-title *ngIf="usuarioLogado">
+        Gerente
+      </ion-title>
+      <ion-title *ngIf="!usuarioLogado">
+        Membro
       </ion-title>
       <ion-img src="../../../../assets/img/igreja betania.png" alt="Logo"></ion-img>
     </ion-buttons>
