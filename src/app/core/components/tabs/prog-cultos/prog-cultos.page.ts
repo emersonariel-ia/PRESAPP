@@ -2,14 +2,12 @@ import { Component, Output } from '@angular/core';
 import { Services } from 'src/app/core/shared/servicos/services.service';
 import { Culto } from 'src/app/models/models';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { Observable, map } from 'rxjs';
-import { format } from 'date-fns';
 import { FormatacaoEConversaoService } from 'src/app/core/shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
 import { LoadingService } from 'src/app/core/shared/servicos/loading/loading.service';
 import { UserService } from 'src/app/core/shared/userDados/user.service';
 
 @Component({
-  selector: 'app-tab2',
+  selector: 'app-prog-cultos',
   templateUrl: 'prog-cultos.page.html',
   styleUrls: ['prog-cultos.page.scss']
 })

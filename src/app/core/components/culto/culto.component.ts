@@ -41,23 +41,12 @@ export class CultoComponent implements OnInit {
         responsavel: this.responsavel,
         tipo: 1,
       };
-      let resp = 0;
-      resp = this.service.criarCulto(this.culto);
-      if (resp == 1) {
 
-        this.titulo = '';
-        this.data = new Date();
-        this.responsavel = '';
-
-        this.serviceMensagem.mensagemDeSucesso('Culto Agendado!');
-      } else {
-        this.serviceMensagem.mensagemDeErroSenhaForaPadrao("Algo deu errado!");
-      }
+      this.service.criarCulto(this.culto);
     }
     else {
-      this.serviceMensagem.mensagemDeErroSenhaForaPadrao("Todos os campos precisam estar preenchidos!", 'bottom', 4000);
+      this.serviceMensagem.mensagemErro("Todos os campos precisam estar preenchidos!", 'bottom', 4000);
     }
-
   }
 
   dateChanged(event: any) {

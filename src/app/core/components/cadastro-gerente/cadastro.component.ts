@@ -4,6 +4,7 @@ import { Services } from '../../shared/servicos/services.service';
 import { Usuario } from 'src/app/models/models';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensagem-toast.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -23,19 +24,15 @@ export class CadastroComponent implements OnInit {
 
   @Output() titulo = "Cadastro Gerente";
 
-  constructor(private router: Router, private toastController: ToastController, private service: Services) { }
-  public toastButtons = [
-    {
-      text: 'fechar',
-      role: 'cancel',
-    },
-  ];
+  constructor(private router: Router, private serviceMensagem: MensagemToastService, private service: Services) { }
+ 
   ngOnInit() { }
 
   async onSubmit() {
 
     if (this.senha !== this.repetirSenha) {
       console.error("As senhas não coincidem.");
+      this.serviceMensagem.mensagemErro("As senhas não coincidem.");
     } else {
 
       this.usuarios = {
@@ -44,32 +41,7 @@ export class CadastroComponent implements OnInit {
         senha: this.senha
       }
 
-      let resp = this.service.criaGerente(this.usuarios);
-      console.log(resp);
-      if (resp === 1) {
-        const toast = await this.toastController.create({
-          message: 'Gerente cadastrado com sucesso.',
-          duration: 5000,
-          position: 'bottom',
-          cssClass: 'success-toast',
-          buttons: this.toastButtons
-        });
-
-        await toast.present();
-      } else {
-        const toast = await this.toastController.create({
-          message: 'Erro ao criar gerente',
-          duration: 5000,
-          position: 'bottom',
-          cssClass: 'error-toast',
-          buttons: this.toastButtons
-        });
-
-        await toast.present();
-      }
-
-      // Redirecionar para a próxima página após o login
-      //this.router.navigate(['/login']);
+      this.service.criaGerente(this.usuarios);
     }
   }
 }
