@@ -1,4 +1,4 @@
-<app-cabecalho [titulo]="titulo" [nomeUser]="nomeUsuarioLogado"></app-cabecalho>
+<app-cabecalho [titulo]="titulo" [nomeUser]="nomeUsuarioLogado" [usuarioLogado]="usuarioLogado"></app-cabecalho>
 
 <ion-content *ngIf="exibeConteudo" class="ion-padding-top example-content" [scrollEvents]="true">
   <ion-card *ngFor="let evento of objEvento" color="light">

@@ -26,6 +26,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ListaPresencaComponent } from './core/components/lista-presenca/lista-presenca.component';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 const environment = {
   production: false,
@@ -47,7 +48,9 @@ const environment = {
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
     MatTableModule, BrowserAnimationsModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, SharedModule,
     AngularFireModule.initializeApp(environment.firebase), AngularFireDatabaseModule, AngularFirestoreModule, AngularFireStorageModule,
-    AngularFireAuthModule],
+    AngularFireAuthModule,
+    IonicStorageModule.forRoot() // Adicione esta linha para configurar o Storage
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
