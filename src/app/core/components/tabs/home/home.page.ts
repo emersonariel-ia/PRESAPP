@@ -29,7 +29,13 @@ export class HomePage {
   async ngOnInit() {
     await this.loadingService.exibirLoading();
     // Valida se usuario esta logado
-    this.usuarioLogado = this.userService.logado;
+    // Inscreva-se no evento carregado$
+    this.userService.carregado$.subscribe((carregado) => {
+      if (carregado) {
+        // O serviço está pronto, agora você pode usá-lo
+        this.usuarioLogado = this.userService.logado;
+      }
+    });
 
     this.afDatabase
       .list('/eventos', (ref) => ref.orderByChild('data').limitToLast(1)) // Substitua o caminho e o limite conforme necessário

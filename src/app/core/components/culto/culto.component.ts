@@ -6,6 +6,7 @@ import { IonDatetime } from '@ionic/angular';
 import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensagem-toast.service';
 import { format } from 'date-fns';
 import { FormatacaoEConversaoService } from '../../shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
+import { UserService } from '../../shared/userDados/user.service';
 
 @Component({
   selector: 'app-culto',
@@ -14,7 +15,7 @@ import { FormatacaoEConversaoService } from '../../shared/servicos/formatacaoECo
 })
 export class CultoComponent implements OnInit {
 
-  constructor(private service: Services, private serviceMensagem: MensagemToastService, private formatacaoOuConvercao: FormatacaoEConversaoService) { }
+  constructor(private service: Services, private serviceMensagem: MensagemToastService, private formatacaoOuConvercao: FormatacaoEConversaoService, private userService: UserService) { }
 
   titulo?: string;
   responsavel?: string;
@@ -30,7 +31,17 @@ export class CultoComponent implements OnInit {
 
   @Output() tituloCabecalho = "Registro de Culto";
 
-  ngOnInit() { }
+  usuarioLogado: boolean = this.userService.logado;
+
+  async ngOnInit() {
+    // Inscreva-se no evento carregado$
+    this.userService.carregado$.subscribe((carregado) => {
+      if (carregado) {
+        // O serviço está pronto, agora você pode usá-lo
+        this.usuarioLogado = this.userService.logado;
+      }
+    });
+  }
 
   onSubmit() {
     // Valida se todos os campos estão preenchidos

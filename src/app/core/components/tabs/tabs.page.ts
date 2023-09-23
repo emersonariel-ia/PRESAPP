@@ -14,7 +14,14 @@ export class TabsPage {
 
   ngOnInit() {
     // Valida se usuario esta logado
-    this.usuarioLogado = this.userService.logado;
+    // Inscreva-se no evento carregado$
+    this.userService.carregado$.subscribe((carregado) => {
+      if (carregado) {
+        // O serviço está pronto, agora você pode usá-lo
+        this.usuarioLogado = this.userService.logado;
+      }
+    });
+
   }
 
 }
