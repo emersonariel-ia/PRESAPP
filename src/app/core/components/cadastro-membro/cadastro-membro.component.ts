@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Services } from '../../shared/servicos/services.service';
 import { Membro } from 'src/app/models/models';
-import { ToastController } from '@ionic/angular';
 import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensagem-toast.service';
 
 interface Ministerios {
@@ -52,13 +51,6 @@ export class CadastroMembroComponent implements OnInit {
       ministerio: this.ministerioSelecionados
     }
 
-    const retorno = this.service.criarMembro(this.cadastroMembro);
-    console.log('ret', retorno);
-    if (retorno == 1) {
-      this.nome = '';
-      this.ministerioSelecionados = [];
-
-      this.serviceMensagem.mensagemDeSucesso('Membro cadastrado com sucesso.');
-    } 
+    this.service.criarMembro(this.cadastroMembro);    
   }
 }

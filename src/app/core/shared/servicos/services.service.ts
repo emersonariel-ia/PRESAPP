@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { getDatabase, ref, onValue, set, get } from 'firebase/database';
-import { Culto, Usuario, UserResponse, Membro } from 'src/app/models/models';
+import { getDatabase, ref, set, get } from 'firebase/database';
+import { Culto, Usuario, Membro } from 'src/app/models/models';
 import { environment } from 'src/environments/environment';
 import { MensagemToastService } from './mensagemToast/mensagem-toast.service';
 
@@ -11,22 +11,19 @@ import { MensagemToastService } from './mensagemToast/mensagem-toast.service';
   providedIn: 'root'
 })
 export class Services {
-
   constructor(private afDatabase: AngularFireDatabase, private serviceMensagem: MensagemToastService) { }
+  public toastButtons = [
+    {
+      text: 'fechar',
+      role: 'cancel',
+    },
+  ];
 
   app = initializeApp(environment.firebase);
   db = getDatabase();
   auth = getAuth(this.app);
   ref = ref(this.db, 'cultos/');
 
-  // recuperaCultos(): promise<Culto> {
-  //   onValue(this.ref, (snapshot) => {
-  //     const data = snapshot.val();
-  //     console.log(data);
-  //     const vls = Object.values(snapshot.val());
-  //     return vls;
-  //   });
-  // }
   cultos!: Culto[];
   async get(): Promise<Array<Culto>> {
     const snapshot = await get(this.ref);
@@ -40,7 +37,7 @@ export class Services {
     return this.cultos;
   }
 
-  criarCulto(data: Culto): number {
+  criarCulto(data: Culto) {
     const { v4: uuidv4 } = require('uuid');
     const ob = set(ref(this.db, 'eventos/' + uuidv4()), {
       titulo: data.titulo,
@@ -48,34 +45,24 @@ export class Services {
       data: data.data,
       tipo: 1
     }).then(d => {
-      console.log(ob)
-      return 1;
+      console.log(ob);
+      this.serviceMensagem.mensagemDeSucesso('Culto Criado!', 'bottom', 1000, '/tabs/prog-cultos');
+    
     }).catch((error) => {
       console.log(error);
-      return 0;
+      this.serviceMensagem.mensagemErro('Não foi possível registrar culto! Tente novamente.');
     })
-
-    return 1;
   }
 
-  criaGerente(data: Usuario): number {
-    let resp = 3;
+  criaGerente(data: Usuario) {
     createUserWithEmailAndPassword(this.auth, data.email, data.senha)
       .then(() => {
-        // Signed in 
-        // const user = userCredential.user;
-        // console.log('login do usuario', userCredential);
-        resp = 1;
+        this.serviceMensagem.mensagemDeSucesso('Gerente Criado!', 'bottom', 1000, '/');
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        resp = 0;
+        console.log(error);
+        this.serviceMensagem.mensagemErro('Algo deu errado, Revise e tente novamente');
       });
-
-    console.log('resposta', resp);
-    return resp;
   }
 
   entrarGerente(us: Usuario): number {
@@ -96,7 +83,7 @@ export class Services {
     return 1;
   }
 
-  criarMembro(data: Membro): number {
+  criarMembro(data: Membro) {
     const { v4: uuidv4 } = require('uuid');
     const ob = set(ref(this.db, 'membros/' + uuidv4()), {
       name: data.name,
@@ -105,15 +92,13 @@ export class Services {
       ministerio: data.ministerio,
       dataIngresso: new Date()
     }).then(d => {
-      console.log('d', d)
-      return 1;
+      console.log('d', d);
+      this.serviceMensagem.mensagemDeSucesso('Membro cadastrado com sucesso!', 'bottom', 1000, '/');
+      
     }).catch(err => {
       console.log('err', err)
-      return 0;
-    });
-
-    console.log('ob', ob)
-    return 1;
+      this.serviceMensagem.mensagemErro('Algo deu errado, revise e tente novamente.');
+    });    
   }
 
   // Deixei generico como Eventos porque futuramente podemos usar para mais

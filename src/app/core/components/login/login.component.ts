@@ -38,13 +38,15 @@ export class LoginComponent implements OnInit {
       const retornoLogin = this.service.entrarGerente(this.usuarios);
       if (retornoLogin == 1) {
         this.userService.logado = true;
+         
+        console.log(retornoLogin);
 
-        this.userService.userData = {
-          UsuarioLogado: {
-            nome: 'Émerson',
-            email: this.email,
-            senha: this.senha
-          }
+          this.userService.userData = {
+            UsuarioLogado: {
+              nome: 'Émerson',
+              email: this.email,
+              senha: this.senha
+            }
         }
       }
 
