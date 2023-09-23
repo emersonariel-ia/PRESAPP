@@ -4,6 +4,7 @@ import { UserService } from '../../shared/userDados/user.service';
 import { Router } from '@angular/router';
 import { Services } from '../../shared/servicos/services.service';
 import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensagem-toast.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensag
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router, private service: Services, private serviceMensagem: MensagemToastService) { }
+  constructor(private userService: UserService, private router: Router, private service: Services, private serviceMensagem: MensagemToastService, private storage: Storage) { }
 
   nome?: string;
   email?: string;
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     console.log('dados', this.userService.userData);
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.email !== '' && this.senha !== '') {
       const email = this.email || '';
       const senha = this.senha || '';
@@ -46,6 +47,8 @@ export class LoginComponent implements OnInit {
             senha: this.senha
           }
         }
+        await this.storage.create();
+        this.storage.set('usuario', this.userService);
       }
 
       this.serviceMensagem.mensagemDeSucesso('Usuário logado com sucesso!', 'bottom', 1000, '/')

@@ -1,4 +1,4 @@
-<app-cabecalho [titulo]="titulo"></app-cabecalho>
+<app-cabecalho [titulo]="titulo" [usuarioLogado]="usuarioLogado"></app-cabecalho>
 
 <ion-content class="ion-padding-top example-content" [scrollEvents]="true">
   <ion-card *ngFor="let culto of cultos">
@@ -6,11 +6,15 @@
     <ion-card-header>
       <ion-card-subtitle color="primary">{{culto.titulo}}</ion-card-subtitle>
       <div class="icon-container">
-        <a *ngIf="!culto.presenca" href="/tabs/lista-presenca?codEvento={{culto.codEvento}}&modo=novo">
+        <a *ngIf="!culto.presenca && usuarioLogado" href="/tabs/lista-presenca?codEvento={{culto.codEvento}}&modo=novo">
           <ion-icon name="create" size="large"></ion-icon>
         </a>
-        <a *ngIf="culto.presenca" href="/tabs/lista-presenca?codEvento={{culto.codEvento}}&modo=editar">
+        <a *ngIf="culto.presenca && usuarioLogado"
+          href="/tabs/lista-presenca?codEvento={{culto.codEvento}}&modo=editar">
           <ion-icon name="checkmark-done-circle" size="large"></ion-icon>
+        </a>
+        <a *ngIf="usuarioLogado" href="/tabs/lista-presenca?codEvento={{culto.codEvento}}&modo=editar">
+          <img src="../../../../../assets/img/lapis.png" alt="Editar">
         </a>
       </div>
 
@@ -31,7 +35,7 @@
   </ion-card>
 </ion-content>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+<ion-fab *ngIf="usuarioLogado" slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button href="/tabs/registro-culto">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>

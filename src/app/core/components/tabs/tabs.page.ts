@@ -12,4 +12,9 @@ export class TabsPage {
 
   constructor(private userService: UserService) { }
 
+  ngOnInit() {
+    // Valida se usuario esta logado
+    this.usuarioLogado = this.userService.logado;
+  }
+
 }

@@ -12,15 +12,13 @@ export class CabecalhoComponent implements OnInit {
   @Input() titulo?: string = "Betânia";
   @Input() urlBack?: string = "/";
   @Input() nomeUser?: string = "";
-
-  usuarioLogado: boolean = this.userService.logado;
+  @Input() usuarioLogado: boolean = false;
 
   constructor(private router: Router, private userService: UserService) { }
 
   paraLogin() {
 
   }
-  ngOnInit() {
-  }
+  async ngOnInit() { }
 
 }

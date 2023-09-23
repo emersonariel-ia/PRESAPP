@@ -6,6 +6,7 @@ import { Observable, map } from 'rxjs';
 import { format } from 'date-fns';
 import { FormatacaoEConversaoService } from 'src/app/core/shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
 import { LoadingService } from 'src/app/core/shared/servicos/loading/loading.service';
+import { UserService } from 'src/app/core/shared/userDados/user.service';
 
 @Component({
   selector: 'app-tab2',
@@ -15,14 +16,19 @@ import { LoadingService } from 'src/app/core/shared/servicos/loading/loading.ser
 export class ProgCultos {
 
   @Output() titulo: string = 'Programação de culto';
+  usuarioLogado: boolean = this.userService.logado;
 
   cultos: any = [];
   eventos: any = [];
 
-  constructor(private service: Services, private afDatabase: AngularFireDatabase, private formatacaoOuConvercao: FormatacaoEConversaoService, private loadingService: LoadingService) { }
+  constructor(private service: Services, private afDatabase: AngularFireDatabase, private formatacaoOuConvercao: FormatacaoEConversaoService,
+    private loadingService: LoadingService, private userService: UserService) { }
 
   async ngOnInit() {
     await this.loadingService.exibirLoading();
+    // Valida se usuario esta logado
+    this.usuarioLogado = this.userService.logado;
+
     //this.cultos = this.afDatabase.list('/eventos');
     this.eventos = this.afDatabase.list('/eventos', (ref) => ref.orderByChild('data').limitToLast(10));
 

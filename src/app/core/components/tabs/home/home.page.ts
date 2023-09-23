@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators'; // Importe a função take
 import { format } from 'date-fns';
 import { LoadingService } from 'src/app/core/shared/servicos/loading/loading.service';
 import { FormatacaoEConversaoService } from 'src/app/core/shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-home',
@@ -23,10 +24,12 @@ export class HomePage {
   objEvento: any[] = [];
   exibeConteudo: boolean = false;
 
-  constructor(private router: Router, private userService: UserService, private afDatabase: AngularFireDatabase, private loadingService: LoadingService, private formatacaoOuConvercao: FormatacaoEConversaoService) { }
+  constructor(private router: Router, private userService: UserService, private afDatabase: AngularFireDatabase, private loadingService: LoadingService, private formatacaoOuConvercao: FormatacaoEConversaoService, private storage: Storage) { }
 
   async ngOnInit() {
     await this.loadingService.exibirLoading();
+    // Valida se usuario esta logado
+    this.usuarioLogado = this.userService.logado;
 
     this.afDatabase
       .list('/eventos', (ref) => ref.orderByChild('data').limitToLast(1)) // Substitua o caminho e o limite conforme necessário
