@@ -1,12 +1,16 @@
-<app-cabecalho [titulo]="titulo"></app-cabecalho>
+<app-cabecalho [titulo]="titulo" [usuarioLogado]="usuarioLogado"></app-cabecalho>
 
-<ion-content>
-  <ion-list>
+<ion-content class="conteudoListaPresenca ion-padding-top">
+  <ion-searchbar [(ngModel)]="searchTerm" [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+  <ion-text color="primary" style="text-align: end;">
+    <h2>{{membrosPresentes}}/{{totalMembros}} membros</h2>
+  </ion-text>
+  <ion-list *ngIf="exibeConteudo" class="listaPresenca">
     <!-- Exemplo de lista de presença com ion-checkbox -->
     <ion-item *ngFor="let membro of listaDePresenca">
       <ion-checkbox [(ngModel)]="membro.presencaConfirmada" (ionChange)="checkboxChanged($event, membro.codMembro)"
         color="primary" checked="{{membro.presencaConfirmada}}"></ion-checkbox>
-      <ion-label> {{ membro.nome }}</ion-label>
+      <ion-label class="labelPresenca"> {{ membro.nome }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

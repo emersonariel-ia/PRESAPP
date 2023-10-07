@@ -7,6 +7,8 @@ import { MensagemToastService } from '../../shared/servicos/mensagemToast/mensag
 import { format } from 'date-fns';
 import { FormatacaoEConversaoService } from '../../shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
 import { UserService } from '../../shared/userDados/user.service';
+import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-culto',
@@ -15,7 +17,7 @@ import { UserService } from '../../shared/userDados/user.service';
 })
 export class CultoComponent implements OnInit {
 
-  constructor(private service: Services, private serviceMensagem: MensagemToastService, private formatacaoOuConvercao: FormatacaoEConversaoService, private userService: UserService) { }
+  constructor(private service: Services, private serviceMensagem: MensagemToastService, private formatacaoOuConvercao: FormatacaoEConversaoService, private userService: UserService, private storage: Storage) { }
 
   titulo?: string;
   responsavel?: string;
@@ -31,16 +33,10 @@ export class CultoComponent implements OnInit {
 
   @Output() tituloCabecalho = "Registro de Culto";
 
-  usuarioLogado: boolean = this.userService.logado;
+  usuarioLogado: boolean = false;
 
   async ngOnInit() {
-    // Inscreva-se no evento carregado$
-    this.userService.carregado$.subscribe((carregado) => {
-      if (carregado) {
-        // O serviço está pronto, agora você pode usá-lo
-        this.usuarioLogado = this.userService.logado;
-      }
-    });
+    this.usuarioLogado = await this.storage.get('usuarioLogado');
   }
 
   onSubmit() {

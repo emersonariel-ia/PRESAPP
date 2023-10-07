@@ -40,7 +40,6 @@ export class CadastroMembroComponent implements OnInit {
       Object.entries(data).map(d => {
         this.listaMinisterios.push(d[1]);
       })
-      console.log('Dados do objeto:', this.listaMinisterios);
     });
   }
 
@@ -51,6 +50,9 @@ export class CadastroMembroComponent implements OnInit {
       ministerio: this.ministerioSelecionados
     }
 
-    this.service.criarMembro(this.cadastroMembro);    
+    this.service.criarMembro(this.cadastroMembro);
+
+    this.nome = '';
+    this.ministerioSelecionados = [];
   }
 }

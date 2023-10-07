@@ -2,11 +2,9 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
-      <ion-title>
-        {{titulo}}
-      </ion-title>
     </ion-buttons>
     <ion-button *ngIf="!usuarioLogado" href="/login">Login</ion-button>
+    <ion-button *ngIf="usuarioLogado" (click)="sairLogin()">Sair</ion-button>
     <ion-buttons slot="end">
       <ion-title *ngIf="usuarioLogado">
         Gerente
@@ -18,3 +16,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<div *ngIf="titulo" class="bg-color-titulo-principal">
+  <ion-title>{{titulo}}</ion-title>
+</div>

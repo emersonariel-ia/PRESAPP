@@ -1,4 +1,4 @@
-<app-cabecalho [titulo]="titulo" [nomeUser]="nomeUsuarioLogado" [usuarioLogado]="usuarioLogado"></app-cabecalho>
+<app-cabecalho [titulo]="titulo" [usuarioLogado]="usuarioLogado"></app-cabecalho>
 
 <ion-content *ngIf="exibeConteudo" class="ion-padding-top example-content" [scrollEvents]="true">
   <ion-card *ngFor="let evento of objEvento" color="light">
@@ -16,7 +16,7 @@
     </a>
   </ion-card>
 
-  <!-- <ion-card color="light">
+  <ion-card color="light">
     <img alt="Armadilhas da cultura" src="../../../../assets/img/armadilhasdacultura.png" />
     <ion-chip [outline]="true" [disabled]="true">Próximos eventos</ion-chip>
     <ion-card-header>
@@ -25,7 +25,7 @@
     </ion-card-header>
 
     <ion-button size="small" color="primary">Ver mais</ion-button>
-  </ion-card> -->
+  </ion-card>
 </ion-content>
 
 <ion-fab *ngIf="usuarioLogado" slot="fixed" vertical="bottom" horizontal="end">
@@ -39,8 +39,5 @@
     <ion-fab-button href="/tabs/registro-culto">
       <ion-icon name="calendar-number-outline"></ion-icon>
     </ion-fab-button>
-    <!-- <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button> -->
   </ion-fab-list>
 </ion-fab>

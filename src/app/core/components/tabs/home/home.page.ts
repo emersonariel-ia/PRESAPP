@@ -17,9 +17,8 @@ import { Storage } from '@ionic/storage-angular';
 export class HomePage {
 
   @Output() titulo: string = '';
-  @Output() nomeUsuarioLogado: string = this.userService.userData != null ? this.userService.userData.UsuarioLogado.nome : '';
 
-  usuarioLogado: boolean = this.userService.logado;
+  usuarioLogado: boolean = false;
 
   objEvento: any[] = [];
   exibeConteudo: boolean = false;
@@ -27,17 +26,11 @@ export class HomePage {
   constructor(private router: Router, private userService: UserService, private afDatabase: AngularFireDatabase, private loadingService: LoadingService, private formatacaoOuConvercao: FormatacaoEConversaoService, private storage: Storage) { }
 
   async ngOnInit() {
+    this.usuarioLogado = await this.storage.get('usuarioLogado');
     await this.loadingService.exibirLoading();
     // Valida se usuario esta logado
     // Inscreva-se no evento carregado$
-    this.userService.carregado$.subscribe((carregado) => {
-      if (carregado) {
-        // O serviço está pronto, agora você pode usá-lo
-        this.usuarioLogado = this.userService.logado;
-      }
-    });
-
-    this.afDatabase
+    await this.afDatabase
       .list('/eventos', (ref) => ref.orderByChild('data').limitToLast(1)) // Substitua o caminho e o limite conforme necessário
       .snapshotChanges()
       .pipe(take(1)) // Use take para limitar a 5 itens

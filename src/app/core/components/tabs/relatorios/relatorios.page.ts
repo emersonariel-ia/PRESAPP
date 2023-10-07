@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { Storage } from '@ionic/storage-angular';
 
 
 export interface UserData {
@@ -21,7 +20,9 @@ export class RelatoriosPage {
 
   displayedColumns: string[] = ['id', 'name'];
   dataSource = new MatTableDataSource<UserData>(ELEMENT_DATA);
-  constructor() {
+  usuarioLogado: boolean = false;
+
+  constructor(private storage: Storage) {
     //this.dataSource = new MatTableDataSource<UserData>(ELEMENT_DATA);
   }
 
@@ -29,8 +30,8 @@ export class RelatoriosPage {
 
 
 
-  ngOnInit() {
-
+  async ngOnInit() {
+    this.usuarioLogado = await this.storage.get('usuarioLogado');
   }
 
   applyFilter(filterValue: any) {

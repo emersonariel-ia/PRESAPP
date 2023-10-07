@@ -8,3 +8,21 @@ ion-checkbox::part(container) {
     border-radius: 6px;
     border: 2px solid #1352a0;
 }
+
+.listaPresenca {
+    margin: 0 10px;
+}
+
+.itemListaPresenca {
+    margin-right: 16px;
+}
+
+.conteudoListaPresenca h2 {
+    margin-right: 10px;
+}
+
+ion-item::part(native) {
+    border-color: #1352a0;
+    border-width: 2px;
+    border-radius: 6px;
+}

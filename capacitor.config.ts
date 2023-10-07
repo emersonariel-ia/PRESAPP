@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'mobile',
+  appId: 'com.betania.presapp',
+  appName: 'Presapp',
   webDir: 'www',
   server: {
     androidScheme: 'https'

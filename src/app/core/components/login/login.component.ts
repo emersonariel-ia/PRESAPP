@@ -39,21 +39,22 @@ export class LoginComponent implements OnInit {
       const retornoLogin = this.service.entrarGerente(this.usuarios);
       if (retornoLogin == 1) {
         this.userService.logado = true;
-         
+
         console.log(retornoLogin);
 
-          this.userService.userData = {
-            UsuarioLogado: {
-              nome: 'Émerson',
-              email: this.email,
-              senha: this.senha
-            }
+        this.userService.userData = {
+          UsuarioLogado: {
+            nome: 'Émerson',
+            email: this.email,
+            senha: this.senha
+          }
         }
         await this.storage.create();
-        this.storage.set('usuario', this.userService);
+        this.storage.set('usuarioLogado', true);
+
+        this.serviceMensagem.mensagemDeSucesso('Usuário logado com sucesso!', 'bottom', 1000, '/');
       }
 
-      this.serviceMensagem.mensagemDeSucesso('Usuário logado com sucesso!', 'bottom', 1000, '/')
     }
   }
 }

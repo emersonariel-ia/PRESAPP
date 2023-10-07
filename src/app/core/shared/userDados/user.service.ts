@@ -17,10 +17,10 @@ export class UserService {
 
     this.storage.get('usuario').then((dados) => {
       if (dados) {
-        console.log('Dados recuperados da sessão:', dados);
         // Faça algo com os dados recuperados
         this.userData = dados.userData;
         this.logado = dados.logado;
+        console.log('Dados recuperados da sessão:', this.logado);
         // Quando o serviço estiver pronto, emita true
         this.carregadoSubject.next(true);
       } else {

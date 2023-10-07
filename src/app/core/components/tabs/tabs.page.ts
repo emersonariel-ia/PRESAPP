@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../shared/userDados/user.service';
+import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-tabs',
@@ -8,20 +10,12 @@ import { UserService } from '../../shared/userDados/user.service';
 })
 export class TabsPage {
 
-  usuarioLogado: boolean = this.userService.logado;
+  usuarioLogado: boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private storage: Storage) { }
 
-  ngOnInit() {
-    // Valida se usuario esta logado
-    // Inscreva-se no evento carregado$
-    this.userService.carregado$.subscribe((carregado) => {
-      if (carregado) {
-        // O serviço está pronto, agora você pode usá-lo
-        this.usuarioLogado = this.userService.logado;
-      }
-    });
-
+  async ngOnInit() {
+    this.usuarioLogado = await this.storage.get('usuarioLogado');
   }
 
 }

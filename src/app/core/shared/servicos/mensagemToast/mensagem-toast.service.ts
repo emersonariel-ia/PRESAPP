@@ -25,7 +25,6 @@ export class MensagemToastService {
       cssClass: 'success-toast',
       buttons: this.toastButtons
     });
-
     await toast.present();
 
     if (pUrlNavigation != '') {

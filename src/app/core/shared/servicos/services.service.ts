@@ -6,12 +6,13 @@ import { getDatabase, ref, set, get } from 'firebase/database';
 import { Culto, Usuario, Membro } from 'src/app/models/models';
 import { environment } from 'src/environments/environment';
 import { MensagemToastService } from './mensagemToast/mensagem-toast.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Services {
-  constructor(private afDatabase: AngularFireDatabase, private serviceMensagem: MensagemToastService) { }
+  constructor(private afDatabase: AngularFireDatabase, private serviceMensagem: MensagemToastService, private afAuth: AngularFireAuth) { }
   public toastButtons = [
     {
       text: 'fechar',
@@ -19,35 +20,15 @@ export class Services {
     },
   ];
 
-  app = initializeApp(environment.firebase);
-  db = getDatabase();
-  auth = getAuth(this.app);
-  ref = ref(this.db, 'cultos/');
-
-  cultos!: Culto[];
-  async get(): Promise<Array<Culto>> {
-    const snapshot = await get(this.ref);
-    snapshot.forEach((linha) => {
-      console.log('linha', linha);
-      this.cultos.push({
-        titulo: linha.val().titulo
-      });
-      console.log(linha.val().titulo);
-    })
-    return this.cultos;
-  }
-
   criarCulto(data: Culto) {
     const { v4: uuidv4 } = require('uuid');
-    const ob = set(ref(this.db, 'eventos/' + uuidv4()), {
+    this.afDatabase.database.ref('eventos/' + uuidv4()).set({
       titulo: data.titulo,
       responsavel: data.responsavel,
       data: data.data,
       tipo: 1
     }).then(d => {
-      console.log(ob);
       this.serviceMensagem.mensagemDeSucesso('Culto Criado!', 'bottom', 1000, '/tabs/prog-cultos');
-    
     }).catch((error) => {
       console.log(error);
       this.serviceMensagem.mensagemErro('Não foi possível registrar culto! Tente novamente.');
@@ -55,9 +36,10 @@ export class Services {
   }
 
   criaGerente(data: Usuario) {
-    createUserWithEmailAndPassword(this.auth, data.email, data.senha)
-      .then(() => {
-        this.serviceMensagem.mensagemDeSucesso('Gerente Criado!', 'bottom', 1000, '/');
+    this.afAuth.createUserWithEmailAndPassword(data.email, data.senha)
+      .then((resultado) => {
+        console.log('result ', resultado);
+        this.serviceMensagem.mensagemDeSucesso('Gerente Criado!', 'bottom', 1000);
       })
       .catch((error) => {
         console.log(error);
@@ -66,7 +48,7 @@ export class Services {
   }
 
   entrarGerente(us: Usuario): number {
-    signInWithEmailAndPassword(this.auth, us.email, us.senha)
+    this.afAuth.signInWithEmailAndPassword(us.email, us.senha)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
@@ -85,43 +67,24 @@ export class Services {
 
   criarMembro(data: Membro) {
     const { v4: uuidv4 } = require('uuid');
-    const ob = set(ref(this.db, 'membros/' + uuidv4()), {
+    this.afDatabase.database.ref('membros/' + uuidv4()).set({
       name: data.name,
       frequenciaPorcentagem: 0,
       qtDiasComparecidos: 0,
       ministerio: data.ministerio,
       dataIngresso: new Date()
     }).then(d => {
-      console.log('d', d);
-      this.serviceMensagem.mensagemDeSucesso('Membro cadastrado com sucesso!', 'bottom', 1000, '/');
-      
+      this.serviceMensagem.mensagemDeSucesso('Membro cadastrado com sucesso!', 'bottom', 1000);
     }).catch(err => {
-      console.log('err', err)
       this.serviceMensagem.mensagemErro('Algo deu errado, revise e tente novamente.');
-    });    
+    });
   }
 
   // Deixei generico como Eventos porque futuramente podemos usar para mais
   addMembrosAoEvento(data: Membro, pUuid: string, codEvento: string) {
-    console.log('eventos/' + codEvento + '/presenca/' + pUuid)
-    const ob = set(ref(this.db, 'eventos/' + codEvento + '/presenca/' + pUuid), {
+    this.afDatabase.database.ref('eventos/' + codEvento + '/presenca/').push({
       nome: data.name,
       presencaConfirmada: false
-    }).then(d => {
-      console.log(d)
     });
-  }
-
-  listaDeDados = [];
-
-  consultaDataBase(pCaminho: string) {
-    var objDados = this.afDatabase.object(pCaminho);
-    objDados.valueChanges().subscribe((data: any) => {
-      this.listaDeDados = [];
-      Object.entries(data)
-        .map(dado => {
-          console.log('consultaDataBase:', Object.assign(dado));
-        })
-    });;
   }
 }

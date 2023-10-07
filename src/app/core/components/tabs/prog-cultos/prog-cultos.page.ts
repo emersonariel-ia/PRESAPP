@@ -5,6 +5,8 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormatacaoEConversaoService } from 'src/app/core/shared/servicos/formatacaoEConversao/formatacaoOuConversao.service';
 import { LoadingService } from 'src/app/core/shared/servicos/loading/loading.service';
 import { UserService } from 'src/app/core/shared/userDados/user.service';
+import { Storage } from '@ionic/storage-angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-prog-cultos',
@@ -12,40 +14,31 @@ import { UserService } from 'src/app/core/shared/userDados/user.service';
   styleUrls: ['prog-cultos.page.scss']
 })
 export class ProgCultos {
-
+  record$!: Observable<any>;
   @Output() titulo: string = 'Programação de culto';
-  usuarioLogado: boolean = this.userService.logado;
+  usuarioLogado: boolean = false;
 
   cultos: any = [];
   eventos: any = [];
 
+
   constructor(private service: Services, private afDatabase: AngularFireDatabase, private formatacaoOuConvercao: FormatacaoEConversaoService,
-    private loadingService: LoadingService, private userService: UserService) { }
+    private loadingService: LoadingService, private userService: UserService, private storage: Storage) { }
 
   async ngOnInit() {
     await this.loadingService.exibirLoading();
-    // Valida se usuario esta logado
-    // Inscreva-se no evento carregado$
-    this.userService.carregado$.subscribe((carregado) => {
-      if (carregado) {
-        // O serviço está pronto, agora você pode usá-lo
-        this.usuarioLogado = this.userService.logado;
-      }
-    });
-
-    //this.cultos = this.afDatabase.list('/eventos');
-    this.eventos = this.afDatabase.list('/eventos', (ref) => ref.orderByChild('data').limitToLast(10));
-
+    this.usuarioLogado = await this.storage.get('usuarioLogado');
+    this.eventos = this.afDatabase.object('/eventos');
     // Leia os dados do objeto
     this.eventos.valueChanges().subscribe((data: Culto) => {
-      console.log('Dados do objeto:', data);
       this.cultos = [];
       Object.entries(data).map(d => {
         var objDado = d[1];
         this.cultos.push(Object.assign(objDado, { codEvento: d[0] }));
       })
-      this.loadingService.esconderLoading();
     });
+
+    await this.loadingService.esconderLoading();
   }
 
   formatDate(dateString: string): string {
